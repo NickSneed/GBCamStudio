@@ -4,13 +4,14 @@ import FileLoader from '../components/FileLoader.js';
 
 const Home = () => {
     const [fileBuffer, setFileBuffer] = useState(null);
+    const palette = 'sgb2h';
 
     return (
         <>
             <FileLoader setFileBuffer={setFileBuffer} />
             <br />
             {Array.from({ length: 30 }, (_, i) => (
-                <Photo key={i} data={fileBuffer} photoIndex={i + 1} paletteId={'sgb1a'} />
+                <Photo key={i} data={fileBuffer} photoIndex={i + 1} paletteId={palette} />
             ))}
         </>
     );
