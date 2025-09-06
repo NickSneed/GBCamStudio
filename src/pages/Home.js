@@ -11,7 +11,7 @@ const Home = () => {
             <FileLoader setFileBuffer={setFileBuffer} />
             <br />
             {Array.from({ length: 30 }, (_, i) => (
-                <Photo key={i} data={fileBuffer} photoIndex={i + 1} paletteId={palette} />
+                <Photo key={i} data={fileBuffer} photoIndex={i} paletteId={palette} />
             ))}
         </>
     );
