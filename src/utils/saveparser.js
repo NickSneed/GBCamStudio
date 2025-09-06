@@ -15,31 +15,28 @@ const getTileIndex = (base, tileId) => {
  * Extracts pixel data for a single photo from the save file and converts it into an ImageData object.
  * It reads the 2bpp tile data and maps it to the provided color palette.
  * @param {Uint8Array} saveData The raw save data for the Game Boy Camera.
- * @param {import('canvas').CanvasRenderingContext2D} ctx The 2D rendering context, used to create ImageData.
  * @param {number} photoIndex The index of the photo to extract (0-29).
- * @param {Array<{r: number, g: number, b: number}>} palette The color palette to apply to the image.
- * @returns {ImageData} An ImageData object representing the photo.
+ * @returns {{width: number, height: number, data: Uint8Array}} An object containing the image dimensions and a flat array of palette indices (0-3).
  */
-const getImgData = (saveData, ctx, photoIndex, palette) => {
+const getImgData = (saveData, photoIndex) => {
     // First photo at 0x2000, 0x1000 per photo
     const offset = 0x2000 + photoIndex * 0x1000;
-    let x, y, i, p, X;
     const w = 128;
     const h = 112;
     const wTiles = w >> 3;
-    const hTiles = h >> 3;
-    const imageData = ctx.createImageData(w, h);
-    let val;
-    let tdata;
 
-    for (y = 0; y < hTiles * 8; y++) {
-        for (x = 0; x < wTiles; x++) {
-            tdata = getTileIndex(offset + 0, (y >> 3) * 0x10 + x);
+    // This will store the decoded palette index (0-3) for each pixel.
+    const decodedData = [];
 
-            for (i = 0; i < 8; i++) {
-                p = tdata + (y & 7) * 2;
+    // Loops saveData and creates decoded array
+    for (let y = 0; y < h; y++) {
+        for (let x = 0; x < wTiles; x++) {
+            const tdata = getTileIndex(offset, (y >> 3) * 0x10 + x);
 
-                val = 0;
+            for (let i = 0; i < 8; i++) {
+                const p = tdata + (y & 7) * 2;
+
+                let val = 0;
                 if ((saveData[p] & (0x80 >> i)) != 0) {
                     val += 1;
                 }
@@ -47,16 +44,12 @@ const getImgData = (saveData, ctx, photoIndex, palette) => {
                     val += 2;
                 }
 
-                X = x * 8 + i;
-                imageData.data[y * w * 4 + X * 4 + 0] = palette[val]['r'];
-                imageData.data[y * w * 4 + X * 4 + 1] = palette[val]['g'];
-                imageData.data[y * w * 4 + X * 4 + 2] = palette[val]['b'];
-                imageData.data[y * w * 4 + X * 4 + 3] = 0xff;
+                const X = x * 8 + i;
+                decodedData[y * w + X] = val;
             }
         }
     }
-
-    return imageData;
+    return { width: w, height: h, photoData: decodedData };
 };
 
 /**

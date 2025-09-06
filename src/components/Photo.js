@@ -21,7 +21,21 @@ function Photo({ data, photoIndex, paletteId }) {
                 const ctx = canvas.getContext('2d');
 
                 // Now we can get the imageData because we have the context
-                const imageData = getImgData(data, ctx, photoIndex, palette);
+                // Decode the photo to get palette indices
+                const { width, height, photoData } = getImgData(data, photoIndex);
+
+                // Render the decoded data with the selected palette
+                const imageData = ctx.createImageData(width, height);
+
+                for (let i = 0; i < photoData.length; i++) {
+                    const val = photoData[i];
+                    const color = palette[val];
+                    const pixelIndex = i * 4;
+                    imageData.data[pixelIndex] = color.r;
+                    imageData.data[pixelIndex + 1] = color.g;
+                    imageData.data[pixelIndex + 2] = color.b;
+                    imageData.data[pixelIndex + 3] = 0xff; // Alpha
+                }
 
                 // Create a bitmap from the raw image data for efficient drawing
                 const imageBitmap = await createImageBitmap(imageData);
