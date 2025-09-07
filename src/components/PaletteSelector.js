@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { palettes } from 'gbcam-tools';
+import { palettes } from 'gbcam-js';
 import { styles } from '../assets/styles.js';
 
 const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {

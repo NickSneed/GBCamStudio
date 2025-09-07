@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
-import { palettes } from 'gbcam-tools';
+import { palettes } from 'gbcam-js';
 
 function Photo({ data, photoIndex, paletteId }) {
     const canvasRef = useRef(null);

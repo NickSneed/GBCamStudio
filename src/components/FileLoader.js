@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { styles } from '../assets/styles.js';
-import { getData } from 'gbcam-tools';
+import { getData } from 'gbcam-js';
 
 const FileLoader = ({ setSaveData }) => {
     const reader = new FileReader();
