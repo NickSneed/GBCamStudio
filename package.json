@@ -27,6 +27,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "gbcam-tools": "file:../GBCamTools",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0"
