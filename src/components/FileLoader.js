@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { styles } from '../assets/styles.js';
+import { getData } from 'gbcam-tools';
 
-const FileLoader = ({ setFileBuffer }) => {
+const FileLoader = ({ setSaveData }) => {
     const reader = new FileReader();
 
     const handleFileChange = (event) => {
@@ -9,7 +10,9 @@ const FileLoader = ({ setFileBuffer }) => {
         if (file) {
             // On load
             reader.onload = (loadEvent) => {
-                setFileBuffer(new Uint8Array(loadEvent.target.result));
+                const saveData = getData(new Uint8Array(loadEvent.target.result));
+                console.log(saveData);
+                setSaveData(saveData);
             };
 
             // Read the file
@@ -27,5 +30,5 @@ const FileLoader = ({ setFileBuffer }) => {
 export default FileLoader;
 
 FileLoader.propTypes = {
-    setFileBuffer: PropTypes.func.isRequired
+    setSaveData: PropTypes.func.isRequired
 };

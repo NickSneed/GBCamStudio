@@ -3,15 +3,15 @@ import Photo from '../components/Photo.js';
 import ToolBar from '../components/ToolBar.js';
 
 const Home = () => {
-    const [fileBuffer, setFileBuffer] = useState(null);
+    const [saveData, setSaveData] = useState(null);
     const [palette, setPalette] = useState('sgb2h');
 
     return (
         <>
             {Array.from({ length: 30 }, (_, i) => (
-                <Photo key={i} data={fileBuffer} photoIndex={i} paletteId={palette} />
+                <Photo key={i} data={saveData} photoIndex={i} paletteId={palette} />
             ))}
-            <ToolBar palette={palette} setPalette={setPalette} setFileBuffer={setFileBuffer} />
+            <ToolBar palette={palette} setPalette={setPalette} setSaveData={setSaveData} />
         </>
     );
 };

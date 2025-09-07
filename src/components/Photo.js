@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 import { palettes } from 'gbcam-tools';
-import { getImgData } from 'gbcam-tools';
 
 function Photo({ data, photoIndex, paletteId }) {
     const canvasRef = useRef(null);
@@ -22,7 +21,7 @@ function Photo({ data, photoIndex, paletteId }) {
 
                 // Now we can get the imageData because we have the context
                 // Decode the photo to get palette indices
-                const { width, height, photoData } = getImgData(data, photoIndex);
+                const { width, height, photoData } = data.images[photoIndex];
 
                 // Render the decoded data with the selected palette
                 const imageData = ctx.createImageData(width, height);
@@ -57,6 +56,7 @@ function Photo({ data, photoIndex, paletteId }) {
 
     return (
         <>
+            {data?.images ? data.images[photoIndex].comment : null}
             <canvas style={{ display: 'block', float: 'left', margin: '10px', padding: 0 }} ref={canvasRef}></canvas>
         </>
     );

@@ -11,11 +11,11 @@ const toolbarStyles = {
     width: '100%'
 };
 
-const ToolBar = ({ palette, setPalette, setFileBuffer }) => {
+const ToolBar = ({ palette, setPalette, setSaveData }) => {
     return (
         <>
             <div style={toolbarStyles}>
-                <FileLoader setFileBuffer={setFileBuffer} />
+                <FileLoader setSaveData={setSaveData} />
                 <PaletteSelector selectedPalette={palette} onPaletteChange={setPalette} />
                 <span style={{ float: 'right', margin: '20px' }}>GBCam Studio</span>
             </div>
@@ -28,5 +28,5 @@ export default ToolBar;
 ToolBar.propTypes = {
     palette: PropTypes.string.isRequired,
     setPalette: PropTypes.func.isRequired,
-    setFileBuffer: PropTypes.func.isRequired
+    setSaveData: PropTypes.func.isRequired
 };
