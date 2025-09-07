@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { styles } from '../assets/styles.js';
-import { getData } from 'gbcam-js';
+import { parseSave } from 'gbcam-js';
 
 const FileLoader = ({ setSaveData }) => {
     const reader = new FileReader();
@@ -10,8 +10,7 @@ const FileLoader = ({ setSaveData }) => {
         if (file) {
             // On load
             reader.onload = (loadEvent) => {
-                const saveData = getData(new Uint8Array(loadEvent.target.result));
-                console.log(saveData);
+                const saveData = parseSave(new Uint8Array(loadEvent.target.result));
                 setSaveData(saveData);
             };
 
