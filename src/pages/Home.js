@@ -9,7 +9,7 @@ const Home = () => {
 
     return (
         <>
-            <div style={{ padding: '0 0 80px' }}>
+            <div style={{ padding: '0 0 70px' }}>
                 {Array.from({ length: 30 }, (_, i) => (
                     <Photo key={i} data={saveData} photoIndex={i} paletteId={palette} frame={frame} />
                 ))}

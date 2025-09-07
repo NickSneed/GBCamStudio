@@ -4,7 +4,7 @@ import { palettes, applyPalette } from 'gbcam-js';
 
 function Photo({ data, photoIndex, paletteId, frame }) {
     const canvasRef = useRef(null);
-    const scale = 1;
+    const scale = 2;
     const palette = palettes[paletteId];
 
     // Check if within range
@@ -75,17 +75,17 @@ function Photo({ data, photoIndex, paletteId, frame }) {
                     // Create a new bitmap from the recolored image data
                     frameBitmap = await createImageBitmap(frameImageData);
                 }
-                const frameOffset = frame ? 32 : 0;
+                const frameOffset = frame ? 32 * scale : 0;
 
                 // Set canvas dimensions to 2x the original image size
-                canvas.width = (imageData.width + frameOffset) * scale;
-                canvas.height = (imageData.height + frameOffset) * scale;
+                canvas.width = imageData.width * scale + frameOffset;
+                canvas.height = imageData.height * scale + frameOffset;
 
                 // Disable anti-aliasing to get crisp, hard-edge pixels
                 ctx.imageSmoothingEnabled = false;
 
                 // Draw the bitmap onto the canvas, scaling it up
-                ctx.drawImage(imageBitmap, frameOffset / 2, frameOffset / 2, imageData.width, imageData.height);
+                ctx.drawImage(imageBitmap, frameOffset / 2, frameOffset / 2, imageData.width * scale, imageData.height * scale);
 
                 // Draw frame
                 if (frameBitmap) {
