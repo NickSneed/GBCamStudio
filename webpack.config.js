@@ -20,10 +20,11 @@ export default {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            "@babel/preset-env", [
-                                "@babel/preset-react",
+                            '@babel/preset-env',
+                            [
+                                '@babel/preset-react',
                                 {
-                                    "runtime": "automatic"
+                                    runtime: 'automatic'
                                 }
                             ]
                         ]
@@ -31,12 +32,7 @@ export default {
                 }
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
+                test: /\.s[ac]ss$/i
             }
         ]
     },
@@ -49,7 +45,7 @@ export default {
         port: 3000,
         open: false,
         compress: true,
-        static: { 
+        static: {
             directory: path.join(__dirname, './dist/'),
             publicPath: '/'
         }

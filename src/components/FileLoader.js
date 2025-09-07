@@ -18,7 +18,7 @@ const FileLoader = ({ setFileBuffer }) => {
 
     return (
         <>
-            <input type="file" className="files" id="images" accept="" multiple onChange={handleFileChange} />
+            <input style={{ margin: '10px' }} type="file" className="files" id="images" accept="" multiple onChange={handleFileChange} />
         </>
     );
 };

@@ -57,7 +57,7 @@ function Photo({ data, photoIndex, paletteId }) {
 
     return (
         <>
-            <canvas ref={canvasRef}></canvas>
+            <canvas style={{ display: 'block', float: 'left', margin: '10px', padding: 0 }} ref={canvasRef}></canvas>
         </>
     );
 }
