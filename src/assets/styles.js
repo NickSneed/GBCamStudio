@@ -2,13 +2,14 @@ export const styles = {
     // Merged styles from App.css and inline styles
     button: {
         margin: '10px',
-        padding: '10px',
+        padding: '13px',
         cursor: 'pointer',
         border: '1px solid #ccc',
         borderRadius: '4px',
         backgroundColor: '#f0f0f0',
         fontFamily: 'sans-serif',
-        fontSize: '14px'
+        fontSize: '14px',
+        float: 'left'
     },
     input: {
         margin: '10px',
@@ -16,9 +17,9 @@ export const styles = {
         cursor: 'pointer',
         border: '1px solid #ccc',
         borderRadius: '4px',
-        backgroundColor: '#000',
         fontFamily: 'sans-serif',
-        fontSize: '14px'
+        fontSize: '14px',
+        float: 'left'
     },
     dropdownContainer: {
         display: 'grid',
@@ -29,6 +30,9 @@ export const styles = {
         backgroundColor: 'rgba(0,0,0,0.9)',
         border: '1px solid #444',
         borderRadius: '4px',
+        bottom: '60px',
+        left: '0',
+        right: '0',
         zIndex: 10 // Ensure it appears above other content
     },
     label: {
