@@ -86,6 +86,8 @@ function Photo({ data, photoIndex, paletteId, frame }) {
 
                 // Draw the bitmap onto the canvas, scaling it up
                 ctx.drawImage(imageBitmap, frameOffset / 2, frameOffset / 2, imageData.width, imageData.height);
+
+                // Draw frame
                 if (frameBitmap) {
                     ctx.drawImage(frameBitmap, 0, 0, canvas.width, canvas.height);
                 }
