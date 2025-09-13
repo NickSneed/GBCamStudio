@@ -10,12 +10,14 @@ const Home = () => {
 
     return (
         <>
-            <div style={{ padding: '0 0 70px' }}>
-                {Array.from({ length: 30 }, (_, i) => (
-                    <Photo key={i} data={saveData} photoIndex={i} paletteId={palette} frame={frame} scaleFactor={scaleFactor} />
-                ))}
-                <div style={{ clear: 'both' }}></div>
-            </div>
+            {saveData ? (
+                <div style={{ padding: '0 0 70px' }}>
+                    {Array.from({ length: 30 }, (_, i) => (
+                        <Photo key={i} image={saveData.images[i]} paletteId={palette} frame={frame} scaleFactor={scaleFactor} />
+                    ))}
+                    <div style={{ clear: 'both' }}></div>
+                </div>
+            ) : null}
             <ToolBar palette={palette} setPalette={setPalette} setSaveData={setSaveData} setFrame={setFrame} setScaleFactor={setScaleFactor} />
         </>
     );

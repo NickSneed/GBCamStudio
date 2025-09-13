@@ -12,6 +12,7 @@ const FileLoader = ({ setSaveData }) => {
             reader.onload = (loadEvent) => {
                 const saveData = parseSave(loadEvent.target.result);
                 setSaveData(saveData);
+                window.scrollTo(0, 0);
             };
 
             // Read the file
