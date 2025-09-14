@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { parseSave } from 'gbcam-js';
+import * as styles from './FileLoader.module.css';
 
-const FileLoader = ({ setSaveData }) => {
+const FileLoader = ({ onChange }) => {
     const reader = new FileReader();
 
     const handleFileChange = (event) => {
@@ -9,9 +9,7 @@ const FileLoader = ({ setSaveData }) => {
         if (file) {
             // On load
             reader.onload = (loadEvent) => {
-                const saveData = parseSave(loadEvent.target.result);
-                setSaveData(saveData);
-                window.scrollTo(0, 0);
+                onChange(loadEvent);
             };
 
             // Read the file
@@ -21,7 +19,14 @@ const FileLoader = ({ setSaveData }) => {
 
     return (
         <>
-            <input type="file" className="files" id="images" accept="" multiple onChange={handleFileChange} />
+            <input
+                className={styles.input}
+                type="file"
+                id="images"
+                accept=""
+                multiple
+                onChange={handleFileChange}
+            />
         </>
     );
 };
@@ -29,5 +34,5 @@ const FileLoader = ({ setSaveData }) => {
 export default FileLoader;
 
 FileLoader.propTypes = {
-    setSaveData: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
 };

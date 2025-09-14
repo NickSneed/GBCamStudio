@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { palettes } from 'gbcam-js';
+import * as styles from './PaletteSelector.module.css';
 
 const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,22 +14,40 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     return (
         <>
             <div>
-                <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? 'Hide palettes' : 'Select palette'}</button>
+                <button
+                    className={styles.button}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? 'Hide palettes' : 'Select palette'}
+                </button>
 
                 {isOpen && (
-                    <div className="dropdownContainer">
+                    <div className={styles.dropdownContainer}>
                         {Object.keys(palettes).map((paletteId) => {
                             const palette = palettes[paletteId];
                             const isSelected = selectedPalette === paletteId;
 
                             return (
-                                <label key={paletteId}>
-                                    <input type="radio" name="palette" value={paletteId} checked={isSelected} onChange={(e) => handleSelect(e.target.value)} className="radioInput" />
-                                    <span className="swatchContainer" style={isSelected ? { border: '1px solid #fff' } : { border: '1px solid #000' }}>
+                                <label
+                                    className={styles.label}
+                                    key={paletteId}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="palette"
+                                        value={paletteId}
+                                        checked={isSelected}
+                                        onChange={(e) => handleSelect(e.target.value)}
+                                        className={styles.radioInput}
+                                    />
+                                    <span
+                                        className={styles.swatchContainer}
+                                        style={isSelected ? { border: '1px solid #fff' } : { border: '1px solid #000' }}
+                                    >
                                         {palette.map((c, index) => (
                                             <span
                                                 key={index}
-                                                className="swatchColorBlock"
+                                                className={styles.swatchColorBlock}
                                                 style={{
                                                     backgroundColor: `rgb(${c.r},${c.g},${c.b})`
                                                 }}

@@ -1,6 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,11 +32,26 @@ export default {
                     }
                 }
             },
+            // Rule for global stylesheets
             {
-                test: /\.css$/, // Regular expression to match .css files
+                test: /\.css$/,
+                exclude: /\.module\.css$/, // Exclude CSS Modules
+                use: [process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
+            },
+            // Rule for CSS Modules
+            {
+                test: /\.module\.css$/, // Target files ending with .module.css
                 use: [
-                    'style-loader', // Injects CSS into the DOM
-                    'css-loader' // Interprets and transforms CSS
+                    process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: '[name]__[local]--[hash:base64:5]' // Customize generated class names
+                            },
+                            importLoaders: 1
+                        }
+                    }
                 ]
             }
         ]
@@ -43,6 +59,9 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
         })
     ],
     devServer: {
