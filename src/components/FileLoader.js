@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { styles } from '../assets/styles.js';
 import { parseSave } from 'gbcam-js';
 
 const FileLoader = ({ setSaveData }) => {
@@ -22,7 +21,7 @@ const FileLoader = ({ setSaveData }) => {
 
     return (
         <>
-            <input style={styles.input} type="file" className="files" id="images" accept="" multiple onChange={handleFileChange} />
+            <input type="file" className="files" id="images" accept="" multiple onChange={handleFileChange} />
         </>
     );
 };

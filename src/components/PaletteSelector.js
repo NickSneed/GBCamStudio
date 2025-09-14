@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { palettes } from 'gbcam-js';
-import { styles } from '../assets/styles.js';
 
 const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,31 +13,23 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     return (
         <>
             <div>
-                <button style={styles.button} onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? 'Hide palettes' : 'Select palette'}
-                </button>
+                <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? 'Hide palettes' : 'Select palette'}</button>
 
                 {isOpen && (
-                    <div style={styles.dropdownContainer}>
+                    <div className="dropdownContainer">
                         {Object.keys(palettes).map((paletteId) => {
                             const palette = palettes[paletteId];
                             const isSelected = selectedPalette === paletteId;
 
-                            // Combine base and dynamic styles for the swatch border
-                            const swatchStyle = {
-                                ...styles.swatchContainer,
-                                border: isSelected ? '2px solid #5a0ae5ff' : '2px solid #ccc'
-                            };
-
                             return (
-                                <label key={paletteId} style={styles.label}>
-                                    <input type="radio" name="palette" value={paletteId} checked={isSelected} onChange={(e) => handleSelect(e.target.value)} style={styles.radioInput} />
-                                    <span style={swatchStyle}>
+                                <label key={paletteId}>
+                                    <input type="radio" name="palette" value={paletteId} checked={isSelected} onChange={(e) => handleSelect(e.target.value)} className="radioInput" />
+                                    <span className="swatchContainer" style={isSelected ? { border: '1px solid #fff' } : { border: '1px solid #000' }}>
                                         {palette.map((c, index) => (
                                             <span
                                                 key={index}
+                                                className="swatchColorBlock"
                                                 style={{
-                                                    ...styles.swatchColorBlock,
                                                     backgroundColor: `rgb(${c.r},${c.g},${c.b})`
                                                 }}
                                             ></span>

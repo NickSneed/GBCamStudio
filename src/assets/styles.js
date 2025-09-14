@@ -11,16 +11,6 @@ export const styles = {
         fontSize: '14px',
         float: 'left'
     },
-    input: {
-        margin: '10px',
-        padding: '10px',
-        cursor: 'pointer',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        fontFamily: 'sans-serif',
-        fontSize: '14px',
-        float: 'left'
-    },
     dropdownContainer: {
         display: 'grid',
         gridTemplateColumns: 'auto auto auto auto auto auto auto auto',
