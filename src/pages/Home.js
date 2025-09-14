@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Photo from '../components/Photo.js';
 import ToolBar from '../components/ToolBar.js';
-import '../assets/styles.css';
 
 const Home = () => {
     const [saveData, setSaveData] = useState(null);
@@ -26,13 +25,25 @@ const Home = () => {
                         }}
                     >
                         {Array.from({ length: 30 }, (_, i) => (
-                            <Photo key={i} image={saveData.images[i]} paletteId={palette} frame={frame} scaleFactor={scaleFactor} />
+                            <Photo
+                                key={i}
+                                image={saveData.images[i]}
+                                paletteId={palette}
+                                frame={frame}
+                                scaleFactor={scaleFactor}
+                            />
                         ))}
                         <div style={{ clear: 'both' }}></div>
                     </div>
                 ) : null}
             </div>
-            <ToolBar palette={palette} setPalette={setPalette} setSaveData={setSaveData} setFrame={setFrame} setScaleFactor={setScaleFactor} />
+            <ToolBar
+                palette={palette}
+                setPalette={setPalette}
+                setSaveData={setSaveData}
+                setFrame={setFrame}
+                setScaleFactor={setScaleFactor}
+            />
         </>
     );
 };

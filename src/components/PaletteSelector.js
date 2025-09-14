@@ -42,7 +42,7 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
                                     />
                                     <span
                                         className={styles.swatchContainer}
-                                        style={isSelected ? { border: '1px solid #fff' } : { border: '1px solid #000' }}
+                                        style={isSelected ? { borderColor: 'var(--c-white)' } : null}
                                     >
                                         {palette.map((c, index) => (
                                             <span

@@ -1,0 +1,25 @@
+:root {
+    --c-black: #000;
+    --c-gray: #aaa;
+    --c-white: #fff;
+    --c-green: #169e78;
+    --b-radius-1: 8px;
+    --b-radius-2: 10px;
+}
+
+body {
+    background-color: var(--c-black);
+    color: var(--c-white);
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+input,
+button {
+    background-color: transparent;
+    color: var(--c-white);
+    cursor: pointer;
+    font-size: 14px;
+    border: 2px solid var(--c-white);
+    border-radius: var(--b-radius-1);
+}
