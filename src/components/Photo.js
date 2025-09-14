@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 import { palettes, applyPalette } from 'gbcam-js';
+import * as styles from './Photo.module.css';
 
 function Photo({ image, paletteId, frame, scaleFactor }) {
     const canvasRef = useRef(null);
@@ -109,11 +110,10 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
         <>
             {image.comment || null}
             <canvas
+                className={styles.canvas}
                 width={canvasWidth}
                 height={canvasHeight}
                 style={{
-                    display: 'block',
-                    margin: 'auto',
                     padding: canvasPadding,
                     width: canvasWidth,
                     height: canvasHeight
