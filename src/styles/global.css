@@ -31,6 +31,10 @@ select {
     padding: 13px;
 }
 
+label {
+    cursor: pointer;
+}
+
 option {
     background-color: var(--c-black);
     color: var(--c-white);

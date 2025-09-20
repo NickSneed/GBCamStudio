@@ -10,6 +10,7 @@ const Home = () => {
     const [scaleFactor, setScaleFactor] = useState(2);
     const [mainMessage, setMainMessage] = useState('Select a .sav file');
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isShowDeleted, setIsShowDeleted] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -49,21 +50,39 @@ const Home = () => {
                             'repeat(auto-fit, minmax(' + 160 * scaleFactor + 'px, 1fr))'
                     }}
                 >
-                    {Array.from({ length: 30 }, (_, i) => (
-                        <Photo
-                            key={i}
-                            image={saveData.images[i]}
-                            paletteId={palette}
-                            frame={frame}
-                            scaleFactor={scaleFactor}
-                        />
-                    ))}
+                    {Array.from(
+                        { length: 30 },
+                        (_, i) =>
+                            saveData.images[i] &&
+                            (!saveData.images[i].isDeleted || isShowDeleted) && (
+                                <Photo
+                                    key={i}
+                                    image={saveData.images[i]}
+                                    paletteId={palette}
+                                    frame={frame}
+                                    scaleFactor={scaleFactor}
+                                />
+                            )
+                    )}
                     <div style={{ clear: 'both' }}></div>
                 </div>
             ) : null}
             {mainMessage ? <div className="main-message">{mainMessage}</div> : null}
             <div className="main-message">{mainMessage}</div>
-            <Modal isOpen={isSettingsOpen} />
+            <Modal
+                isOpen={isSettingsOpen}
+                setIsSettingsOpen={setIsSettingsOpen}
+                title="Settings"
+            >
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={isShowDeleted}
+                        onChange={(e) => setIsShowDeleted(e.target.checked)}
+                    />
+                    Show Deleted
+                </label>
+            </Modal>
             <ToolBar
                 palette={palette}
                 setPalette={setPalette}

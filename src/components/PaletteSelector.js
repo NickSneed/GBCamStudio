@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { palettes } from 'gbcam-js';
 import * as styles from './PaletteSelector.module.css';
+import Modal from './Modal.js';
 
 const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,11 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
                     {`Palette: ${selectedPalette}`}
                 </button>
 
-                {isOpen && (
+                <Modal
+                    isOpen={isOpen}
+                    setIsSettingsOpen={setIsOpen}
+                    title="Select a palette"
+                >
                     <div className={styles.dropdownContainer}>
                         {Object.keys(palettes).map((paletteId) => {
                             const palette = palettes[paletteId];
@@ -42,7 +47,9 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
                                     />
                                     <span
                                         className={styles.swatchContainer}
-                                        style={isSelected ? { borderColor: 'var(--c-white)' } : null}
+                                        style={
+                                            isSelected ? { borderColor: 'var(--c-white)' } : null
+                                        }
                                     >
                                         {palette.map((c, index) => (
                                             <span
@@ -59,7 +66,7 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
                             );
                         })}
                     </div>
-                )}
+                </Modal>
             </div>
         </>
     );

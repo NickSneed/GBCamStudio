@@ -79,7 +79,8 @@ ToolBar.propTypes = {
     setSaveData: PropTypes.func.isRequired,
     setFrame: PropTypes.func.isRequired,
     setScaleFactor: PropTypes.func.isRequired,
-    setMainMessage: PropTypes.func.isRequired,
+    setIsSettingsOpen: PropTypes.func.isRequired,
+    isSettingsOpen: PropTypes.bool.isRequired,
     frame: PropTypes.object,
     scaleFactor: PropTypes.number.isRequired
 };

@@ -37,12 +37,20 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                     const originalFrameBitmap = await createImageBitmap(new Blob([frame]));
 
                     // Use an OffscreenCanvas for recoloring the frame
-                    const offscreenCanvas = new OffscreenCanvas(originalFrameBitmap.width, originalFrameBitmap.height);
+                    const offscreenCanvas = new OffscreenCanvas(
+                        originalFrameBitmap.width,
+                        originalFrameBitmap.height
+                    );
                     const offscreenCtx = offscreenCanvas.getContext('2d');
 
                     // Draw the original frame to the offscreen canvas to get its pixel data
                     offscreenCtx.drawImage(originalFrameBitmap, 0, 0);
-                    const frameImageData = offscreenCtx.getImageData(0, 0, originalFrameBitmap.width, originalFrameBitmap.height);
+                    const frameImageData = offscreenCtx.getImageData(
+                        0,
+                        0,
+                        originalFrameBitmap.width,
+                        originalFrameBitmap.height
+                    );
                     const frameData = frameImageData.data;
 
                     // The original grayscale palette of the frame file.
@@ -58,11 +66,17 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                     const newPalette = palette.map((c) => [c.r, c.g, c.b, 255]);
 
                     // Helper to compare colors
-                    const colorsMatch = (a, b) => a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+                    const colorsMatch = (a, b) =>
+                        a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
 
                     // Iterate over each pixel and replace the color
                     for (let i = 0; i < frameData.length; i += 4) {
-                        const pixel = [frameData[i], frameData[i + 1], frameData[i + 2], frameData[i + 3]];
+                        const pixel = [
+                            frameData[i],
+                            frameData[i + 1],
+                            frameData[i + 2],
+                            frameData[i + 3]
+                        ];
                         for (let j = 0; j < originalFramePalette.length; j++) {
                             if (colorsMatch(pixel, originalFramePalette[j])) {
                                 frameData[i] = newPalette[j][0];
@@ -96,7 +110,10 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                 }
 
                 // Create and prepare the save canvas in memory
-                const saveCanvas = new OffscreenCanvas(compositionCanvas.width * saveScale, compositionCanvas.height * saveScale);
+                const saveCanvas = new OffscreenCanvas(
+                    compositionCanvas.width * saveScale,
+                    compositionCanvas.height * saveScale
+                );
                 const saveCtx = saveCanvas.getContext('2d');
                 saveCtx.imageSmoothingEnabled = false;
                 saveCtx.drawImage(compositionCanvas, 0, 0, saveCanvas.width, saveCanvas.height);
@@ -110,7 +127,13 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                     displayCanvas.width = compositionCanvas.width * scale;
                     displayCanvas.height = compositionCanvas.height * scale;
                     displayCtx.imageSmoothingEnabled = false;
-                    displayCtx.drawImage(compositionCanvas, 0, 0, displayCanvas.width, displayCanvas.height);
+                    displayCtx.drawImage(
+                        compositionCanvas,
+                        0,
+                        0,
+                        displayCanvas.width,
+                        displayCanvas.height
+                    );
                 }
             } catch (error) {
                 console.log(error);
@@ -136,7 +159,7 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
     };
 
     // Return if there is no image
-    if (!image || image.isDeleted) {
+    if (!image) {
         return null;
     }
 
