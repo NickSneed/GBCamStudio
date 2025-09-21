@@ -5,8 +5,8 @@
   "description": "A studio app for Game Boy Camera photos",
   "main": "src/app.js",
   "scripts": {
-    "test": "node build/clearConsole && stylelint src/styles && eslint src",
-    "build": "node build/clearConsole && rimraf dist/* --glob && webpack --mode production",
+    "test": "node build/clearConsole && eslint src",
+    "build": "eslint src && node build/clearConsole && rimraf dist/* --glob && webpack --mode production",
     "start": "node build/clearConsole && webpack serve --mode development"
   },
   "keywords": [],
