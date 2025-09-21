@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import * as styles from './Modal.module.css';
+import closeIcon from '../assets/svgs/close.svg';
 
 const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
     return (
@@ -9,10 +10,10 @@ const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
                 style={{ display: isOpen ? 'block' : 'none' }}
             >
                 <button
-                    className={styles.close}
+                    className={`${styles.close} img-button`}
                     onClick={() => setIsSettingsOpen(!isOpen)}
                 >
-                    X
+                    <img src={closeIcon} />
                 </button>
                 <h2>{title}</h2>
                 {children}
@@ -24,6 +25,7 @@ const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
 Modal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     setIsSettingsOpen: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
     children: PropTypes.node
 };
 

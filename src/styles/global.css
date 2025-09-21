@@ -31,8 +31,19 @@ select {
     padding: 13px;
 }
 
+button.img-button {
+    border: none;
+    margin: 0;
+    padding: 4px;
+}
+
+button.img-button img {
+    width: 35px
+}
+
 label {
     cursor: pointer;
+    display: block;
 }
 
 option {
@@ -41,7 +52,7 @@ option {
 }
 
 select {
-    height: 44px;
+    height: 30px;
     padding: 0 10px;
 }
 

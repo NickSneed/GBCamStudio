@@ -10,11 +10,9 @@ const ToolBar = ({
     setPalette,
     setSaveData,
     setFrame,
-    setScaleFactor,
     setIsSettingsOpen,
     isSettingsOpen,
-    frame,
-    scaleFactor
+    frame
 }) => {
     // Parses the save data
     const loadSave = (event) => {
@@ -45,18 +43,8 @@ const ToolBar = ({
                     selectedPalette={palette}
                     onPaletteChange={setPalette}
                 />
-                <select
-                    className={styles.select}
-                    value={scaleFactor}
-                    onChange={(e) => setScaleFactor(Number(e.target.value))}
-                >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
                 <button
-                    className={styles.settingsbutton}
+                    className={`{styles.settingsbutton} img-button`}
                     onClick={() => setIsSettingsOpen(!isSettingsOpen)}
                 >
                     <img

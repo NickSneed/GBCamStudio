@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Photo from '../components/Photo.js';
 import ToolBar from '../components/ToolBar.js';
 import Modal from '../components/Modal.js';
+import SettingsMenu from '../components/SettingsMenu.js';
 
 const Home = () => {
     const [saveData, setSaveData] = useState(null);
@@ -79,14 +80,12 @@ const Home = () => {
                 setIsSettingsOpen={setIsSettingsOpen}
                 title="Settings"
             >
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={isShowDeleted}
-                        onChange={(e) => setIsShowDeleted(e.target.checked)}
-                    />
-                    Show Deleted
-                </label>
+                <SettingsMenu
+                    isShowDeleted={isShowDeleted}
+                    setIsShowDeleted={setIsShowDeleted}
+                    scaleFactor={scaleFactor}
+                    setScaleFactor={setScaleFactor}
+                />
             </Modal>
             <ToolBar
                 palette={palette}

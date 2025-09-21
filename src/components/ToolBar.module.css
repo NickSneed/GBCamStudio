@@ -24,12 +24,6 @@
     backdrop-filter: blur(5px);
 }
 
-.select {
-    float: left;
-    margin: 0 10px 0 0;
-    padding: 0 20px;
-}
-
 .logo {
     float: right;
     margin: 14px 40px 0;
@@ -38,8 +32,6 @@
 }
 
 .settingsbutton {
-    border: none;
     float: left;
-    padding: 10px 7px;
 }
 
