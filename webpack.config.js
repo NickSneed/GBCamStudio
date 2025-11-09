@@ -2,6 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,13 +37,20 @@ export default {
             {
                 test: /\.css$/,
                 exclude: /\.module\.css$/, // Exclude CSS Modules
-                use: [process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
+                use: [
+                    process.env.NODE_ENV === 'production'
+                        ? MiniCssExtractPlugin.loader
+                        : 'style-loader',
+                    'css-loader'
+                ]
             },
             // Rule for CSS Modules
             {
                 test: /\.module\.css$/, // Target files ending with .module.css
                 use: [
-                    process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+                    process.env.NODE_ENV === 'production'
+                        ? MiniCssExtractPlugin.loader
+                        : 'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -70,6 +78,13 @@ export default {
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css'
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'src/favicon.ico', to: 'favicon.ico' },
+                { from: 'src/manifest.json', to: 'manifest.json' },
+                { from: 'src/pwa-icon.png', to: 'pwa-icon.png' }
+            ]
         })
     ],
     devServer: {

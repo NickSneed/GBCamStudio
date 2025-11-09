@@ -25,13 +25,37 @@
 }
 
 .logo {
-    float: right;
-    margin: 14px 40px 0;
+    display: block;
     font-weight: bold;
     color: var(--c-white);
+    text-align: center;
 }
 
-.settingsbutton {
-    float: left;
+.toolbar input,
+.toolbar button {
+    display: block;
+    margin: 0 0 10px;
+    width: 100%;
 }
 
+@media (min-width: 1024px) {
+    .toolbar input,
+    .toolbar button {
+        display: block;
+        float: left;
+        margin: 0 10px 0 0;
+        max-width: 200px;
+    }
+
+    .logo {
+        float: right;
+        margin: 14px 40px 0;
+        font-weight: bold;
+        color: var(--c-white);
+    }
+
+    button.settingsbutton {
+        float: left;
+        width: auto;
+    }
+}
