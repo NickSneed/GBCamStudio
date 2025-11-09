@@ -16,7 +16,7 @@ const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
                     <img src={closeIcon} />
                 </button>
                 <h2>{title}</h2>
-                {children}
+                <div className={styles.modalscroll}>{children}</div>
             </div>
         </>
     );

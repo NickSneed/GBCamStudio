@@ -15,12 +15,7 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
     return (
         <>
             <div>
-                <button
-                    className={styles.button}
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {`Palette: ${selectedPalette}`}
-                </button>
+                <button onClick={() => setIsOpen(!isOpen)}>{`Palette: ${selectedPalette}`}</button>
 
                 <Modal
                     isOpen={isOpen}

@@ -4,21 +4,28 @@
     box-sizing: border-box;
     bottom: 256px;
     display: none;
+    height: calc(100vh - 20px);
     left: 0;
     margin: 10px;
     padding: 10px 40px 40px;
     position: fixed;
-    right: 0;
-    z-index: 2;
+    top: 0;
+    width: calc(100vw - 20px);
+    z-index: 3;
+}
+
+.modalscroll {
+    overflow: auto;
 }
 
 .modal .close {
     position: absolute;
     right: 16px;
     top: 16px;
+    width: auto;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
     .modal {
         bottom: 76px;
     }

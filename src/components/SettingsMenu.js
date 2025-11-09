@@ -3,7 +3,7 @@ import * as styles from './SettingsMenu.module.css';
 
 const SettingsMenu = ({ isShowDeleted, setIsShowDeleted, scaleFactor, setScaleFactor }) => {
     return (
-        <>
+        <div class={styles.settings}>
             <label>
                 <input
                     type="checkbox"
@@ -25,7 +25,7 @@ const SettingsMenu = ({ isShowDeleted, setIsShowDeleted, scaleFactor, setScaleFa
                     <option>4</option>
                 </select>
             </label>
-        </>
+        </div>
     );
 };
 

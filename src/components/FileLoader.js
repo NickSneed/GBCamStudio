@@ -27,7 +27,7 @@ const FileLoader = ({ onChange, onRemove, showRemove, accept }) => {
     };
 
     return (
-        <>
+        <div class={styles.inputwrapper}>
             <input
                 ref={inputRef}
                 className={styles.input}
@@ -44,7 +44,7 @@ const FileLoader = ({ onChange, onRemove, showRemove, accept }) => {
             >
                 x
             </button>
-        </>
+        </div>
     );
 };
 

@@ -29,29 +29,37 @@ const ToolBar = ({
     return (
         <>
             <div className={styles.toolbar}>
-                <FileLoader
-                    onChange={loadSave}
-                    accept=".sav"
-                />
-                <FileLoader
-                    onChange={loadFrame}
-                    onRemove={() => setFrame(null)}
-                    showRemove={frame ? true : false}
-                    accept=".png"
-                />
-                <PaletteSelector
-                    selectedPalette={palette}
-                    onPaletteChange={setPalette}
-                />
-                <button
-                    className={`${styles.settingsbutton} img-button`}
-                    onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-                >
-                    <img
-                        src={settingsIcon}
-                        alt="Settings"
+                <div className={styles.toolbaritem}>
+                    <FileLoader
+                        onChange={loadSave}
+                        accept=".sav"
                     />
-                </button>
+                </div>
+                <div className={styles.toolbaritem}>
+                    <FileLoader
+                        onChange={loadFrame}
+                        onRemove={() => setFrame(null)}
+                        showRemove={frame ? true : false}
+                        accept=".png"
+                    />
+                </div>
+                <div className={styles.toolbaritem}>
+                    <PaletteSelector
+                        selectedPalette={palette}
+                        onPaletteChange={setPalette}
+                    />
+                </div>
+                <div className={styles.toolbaritem}>
+                    <button
+                        className={`${styles.settingsbutton} img-button`}
+                        onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+                    >
+                        <img
+                            src={settingsIcon}
+                            alt="Settings"
+                        />
+                    </button>
+                </div>
                 <span className={styles.logo}>GBCam Studio</span>
             </div>
             <div className={styles.blur}></div>
