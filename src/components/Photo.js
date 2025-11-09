@@ -6,7 +6,7 @@ import * as styles from './Photo.module.css';
 function Photo({ image, paletteId, frame, scaleFactor }) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
-    const saveScale = 4;
+    const saveScale = 10;
     const palette = palettes[paletteId];
     const displayScale = scaleFactor;
     const imageBaseWidth = frame ? 160 : 128;
