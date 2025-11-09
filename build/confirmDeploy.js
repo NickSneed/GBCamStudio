@@ -35,7 +35,7 @@ async function deploy() {
     }
 
     // Deploy to GitHub Pages
-    if (!(await runCommand('gh-pages -d dist', 'deployment'))) {
+    if (!(await runCommand('gh-pages -d dist --cname gbcs.nicksneed.com', 'deployment'))) {
         return false;
     }
 

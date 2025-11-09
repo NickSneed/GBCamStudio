@@ -27,7 +27,7 @@ const FileLoader = ({ onChange, onRemove, showRemove, accept }) => {
     };
 
     return (
-        <div class={styles.inputwrapper}>
+        <div className={styles.inputwrapper}>
             <input
                 ref={inputRef}
                 className={styles.input}
