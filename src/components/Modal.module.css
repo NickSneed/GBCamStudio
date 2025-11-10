@@ -1,18 +1,22 @@
-.modal {
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(6px);
-    border-radius: var(--b-radius-2);
-    box-sizing: border-box;
-    bottom: 256px;
+.modalwrapper {
+    backdrop-filter: blur(0.8em);
     display: none;
-    height: calc(100vh - 20px);
+    height: 100vh;
     left: 0;
-    margin: 10px;
-    padding: 10px 40px 40px;
+    padding: 1em;
     position: fixed;
     top: 0;
-    width: calc(100% - 20px);
+    width: 100%;
     z-index: 3;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.92);
+    border-radius: var(--b-radius-2);
+    bottom: 256px;
+    height: 100%;
+    padding: 0.4em 2em;
+    width: 100%;
 }
 
 .modalscroll {
@@ -21,13 +25,7 @@
 
 .modal .close {
     position: absolute;
-    right: 16px;
-    top: 16px;
+    right: 2em;
+    top: 2em;
     width: auto;
-}
-
-@media (min-width: 1280px) {
-    .modal {
-        bottom: 76px;
-    }
 }

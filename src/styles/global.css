@@ -74,6 +74,10 @@ select {
     width: 100%;
 }
 
+div {
+    box-sizing: border-box;
+}
+
 @media (min-width: 1280px) {
     body {
         padding: 40px 20px;

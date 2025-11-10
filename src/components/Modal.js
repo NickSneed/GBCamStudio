@@ -4,11 +4,11 @@ import closeIcon from '../assets/svgs/close.svg';
 
 const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
     return (
-        <>
-            <div
-                className={styles.modal}
-                style={{ display: isOpen ? 'block' : 'none' }}
-            >
+        <div
+            className={styles.modalwrapper}
+            style={{ display: isOpen ? 'block' : 'none' }}
+        >
+            <div className={styles.modal}>
                 <button
                     className={`${styles.close} img-button`}
                     onClick={() => setIsSettingsOpen(!isOpen)}
@@ -18,7 +18,7 @@ const Modal = ({ isOpen, setIsSettingsOpen, title, children }) => {
                 <h2>{title}</h2>
                 <div className={styles.modalscroll}>{children}</div>
             </div>
-        </>
+        </div>
     );
 };
 
