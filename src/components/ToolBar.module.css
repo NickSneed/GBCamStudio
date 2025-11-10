@@ -1,14 +1,14 @@
 .toolbar {
     background: var(--c-green-t);
     border-radius: var(--b-radius-2);
-    bottom: 10px;
+    bottom: 1em;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     color: var(--c-white);
-    left: 10px;
-    padding: 10px;
+    left: 1em;
+    padding: 1em;
     position: fixed;
-    width: calc(100% - 20px);
+    width: calc(100% - 2em);
     z-index: 2;
 }
 
@@ -17,51 +17,44 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 270px;
+    height: 20em;
     z-index: 1;
     mask: linear-gradient(to bottom, transparent, white 10%);
     backdrop-filter: blur(5px);
 }
 
+.toolbaritem {
+    display: block;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+.settingsbutton {
+    float: right;
+    width: auto;
+}
+
 .logo {
-    display: block;
-    font-weight: bold;
     color: var(--c-white);
-    text-align: center;
-}
-
-.toolbar .toolbaritem {
-    display: block;
-    margin: 0 0 10px;
-    width: 100%;
-}
-
-button.settingsbutton {
-    display: block;
-    text-align: center;
-    width: 100%;
+    float: left;
+    font-weight: bold;
+    line-height: 3em;
 }
 
 @media (min-width: 1280px) {
     .toolbar .toolbaritem {
         display: block;
         float: left;
-        margin: 0 10px 0 0;
-        max-width: 250px;
+        margin: 0 1em 0 0;
+        max-width: 19em;
     }
 
     .logo {
         float: right;
-        margin: 14px 40px 0;
-        font-weight: bold;
-        color: var(--c-white);
+        margin-right: 2em;
     }
 
     .blur {
-        height: 70px;
-    }
-
-    button.settingsbutton {
-        width: auto;
+        height: 6em;
     }
 }

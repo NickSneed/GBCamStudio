@@ -49,9 +49,9 @@ const ToolBar = ({
                         onPaletteChange={setPalette}
                     />
                 </div>
-                <div className={styles.toolbaritem}>
+                <div className={styles.settingsbutton}>
                     <button
-                        className={`${styles.settingsbutton} img-button`}
+                        className="img-button"
                         onClick={() => setIsSettingsOpen(!isSettingsOpen)}
                     >
                         <img

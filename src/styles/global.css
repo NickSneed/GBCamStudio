@@ -33,13 +33,13 @@ select {
     width: 100%;
 }
 
-button.img-button {
+.img-button {
     border: none;
     margin: 0;
     padding: 4px;
 }
 
-button.img-button img {
+.img-button img {
     width: 35px;
 }
 
