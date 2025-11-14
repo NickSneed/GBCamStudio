@@ -83,7 +83,7 @@ select {
 }
 
 .photo-grid {
-    padding: 0 0 250px;
+    padding: 0 0 240px;
     display: grid;
     gap: 10px;
 }
@@ -107,7 +107,7 @@ div {
     }
 
     .photo-grid {
-        padding: 0 0 70px;
+        padding: 0 0 50px;
         gap: 20px;
     }
 }
