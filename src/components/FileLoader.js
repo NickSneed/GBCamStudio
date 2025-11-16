@@ -2,7 +2,7 @@ import { useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import * as styles from './FileLoader.module.css';
 
-const FileLoader = forwardRef(({ onChange, onRemove, showRemove, accept }, ref) => {
+const FileLoader = forwardRef(({ text, onChange, onRemove, showRemove, accept }, ref) => {
     const reader = new FileReader();
     const internalRef = useRef(null);
     const inputRef = ref || internalRef;
@@ -26,17 +26,30 @@ const FileLoader = forwardRef(({ onChange, onRemove, showRemove, accept }, ref) 
         }
     };
 
+    const handleButtonClick = () => {
+        if (inputRef.current) {
+            inputRef.current.click();
+        }
+    };
+
     return (
         <div className={styles.inputwrapper}>
             <input
                 ref={inputRef}
-                className={`input ${styles.input}`}
+                // The input is hidden, as the button will trigger it
+                style={{ display: 'none' }}
                 type="file"
                 id="images"
                 accept={accept}
                 multiple
                 onChange={handleFileChange}
             />
+            <button
+                className={`button ${styles.button}`}
+                onClick={handleButtonClick}
+            >
+                {text}
+            </button>
             <button
                 className={`closeButton ${styles.remove}`}
                 onClick={handleRemove}

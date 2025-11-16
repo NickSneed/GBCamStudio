@@ -35,6 +35,7 @@ const ToolBar = forwardRef(
                 <div className={`${styles.toolbar} color${color}`}>
                     <div className={styles.toolbaritem}>
                         <FileLoader
+                            text="Select .sav &hellip;"
                             onChange={loadSave}
                             accept=".sav"
                             ref={ref}
@@ -42,6 +43,7 @@ const ToolBar = forwardRef(
                     </div>
                     <div className={styles.toolbaritem}>
                         <FileLoader
+                            text="Select frame &hellip;"
                             onChange={loadFrame}
                             onRemove={() => setFrame(null)}
                             showRemove={frame ? true : false}

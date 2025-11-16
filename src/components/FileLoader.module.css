@@ -7,6 +7,11 @@
     position: relative;
 }
 
+.button {
+    padding-right: 50px !important;
+    text-align: left;
+}
+
 .remove {
     display: none;
     position: absolute;
