@@ -68,7 +68,7 @@ const Home = () => {
         <>
             {saveData ? (
                 <div
-                    className="photo-grid"
+                    className="photoGrid"
                     style={{
                         gridTemplateColumns:
                             'repeat(auto-fit, minmax(' + 160 * scaleFactor + 'px, 1fr))'
@@ -91,8 +91,8 @@ const Home = () => {
                     <div style={{ clear: 'both' }}></div>
                 </div>
             ) : null}
-            {mainMessage ? <div className="main-message">{mainMessage}</div> : null}
-            <div className="main-message">{mainMessage}</div>
+            {mainMessage ? <div className="mainMessage">{mainMessage}</div> : null}
+            <div className="mainMessage">{mainMessage}</div>
             <Modal
                 isOpen={isSettingsOpen}
                 setIsSettingsOpen={setIsSettingsOpen}

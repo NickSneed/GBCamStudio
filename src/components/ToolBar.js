@@ -51,13 +51,13 @@ const ToolBar = ({
                 </div>
                 <div className={styles.settingsbutton}>
                     <button
-                        className="img-button"
+                        className="imgButton"
                         onClick={() => setIsSettingsOpen(!isSettingsOpen)}
                     >
                         &#9965;
                     </button>
                 </div>
-                <span className={`${styles.logo} font-bold`}>GBCam Studio</span>
+                <span className={`${styles.logo} fontBold`}>GBCam Studio</span>
             </div>
         </>
     );
