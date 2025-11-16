@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import * as styles from './FileLoader.module.css';
 
-const FileLoader = ({ onChange, onRemove, showRemove, accept }) => {
+const FileLoader = forwardRef(({ onChange, onRemove, showRemove, accept }, ref) => {
     const reader = new FileReader();
-    const inputRef = useRef(null);
-
+    const internalRef = useRef(null);
+    const inputRef = ref || internalRef;
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -46,9 +46,11 @@ const FileLoader = ({ onChange, onRemove, showRemove, accept }) => {
             </button>
         </div>
     );
-};
+});
 
 export default FileLoader;
+
+FileLoader.displayName = 'FileLoader';
 
 FileLoader.propTypes = {
     onChange: PropTypes.func.isRequired,

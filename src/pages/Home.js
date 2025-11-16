@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Photo from '../components/Photo.js';
 import ToolBar from '../components/ToolBar.js';
 import Modal from '../components/Modal.js';
@@ -14,6 +14,7 @@ const Home = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isShowDeleted, setIsShowDeleted] = useState(getItem('isShowDeleted') || false);
     const [color, setColor] = useState(getItem('color') || 'green');
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         setItem('palette', palette);
@@ -64,6 +65,12 @@ const Home = () => {
         }
     }, [saveData, isShowDeleted]);
 
+    const handleMainMessageClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
     return (
         <>
             {saveData ? (
@@ -91,8 +98,15 @@ const Home = () => {
                     <div style={{ clear: 'both' }}></div>
                 </div>
             ) : null}
-            {mainMessage ? <div className="mainMessage">{mainMessage}</div> : null}
-            <div className="mainMessage">{mainMessage}</div>
+            {mainMessage ? (
+                <div
+                    className="mainMessage"
+                    onClick={handleMainMessageClick}
+                    style={{ cursor: 'pointer' }}
+                >
+                    {mainMessage}
+                </div>
+            ) : null}
             <Modal
                 isOpen={isSettingsOpen}
                 setIsSettingsOpen={setIsSettingsOpen}
@@ -119,6 +133,7 @@ const Home = () => {
                 setIsSettingsOpen={setIsSettingsOpen}
                 isSettingsOpen={isSettingsOpen}
                 color={color}
+                ref={fileInputRef}
             />
         </>
     );
