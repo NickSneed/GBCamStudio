@@ -19,15 +19,15 @@ const ToolBar = forwardRef(
         ref
     ) => {
         // Parses the save data
-        const loadSave = (event) => {
-            const saveData = parseSave(event.target.result);
+        const loadSave = ({ data }) => {
+            const saveData = parseSave(data);
             setSaveData(saveData);
             window.scrollTo(0, 0);
         };
 
         // Set the frame
-        const loadFrame = (event) => {
-            setFrame(event.target.result);
+        const loadFrame = ({ data, name }) => {
+            setFrame({ data, name });
         };
 
         return (

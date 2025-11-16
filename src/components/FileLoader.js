@@ -9,8 +9,8 @@ const FileLoader = forwardRef(({ text, onChange, onRemove, showRemove, accept },
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            reader.onload = (loadEvent) => {
-                onChange(loadEvent);
+            reader.onload = () => {
+                onChange({ data: reader.result, name: file.name });
             };
 
             reader.readAsArrayBuffer(file);

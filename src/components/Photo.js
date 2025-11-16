@@ -4,13 +4,14 @@ import { palettes, applyPalette } from 'gbcam-js';
 import * as styles from './Photo.module.css';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 
-function Photo({ image, paletteId, frame, scaleFactor, isWild }) {
+function Photo({ image, paletteId, frame, scaleFactor }) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
     const saveScale = 10;
     const palette = palettes[paletteId];
     const displayScale = scaleFactor;
     const imageBaseWidth = frame ? 160 : 128;
+    const isWild = frame && frame.name.includes('wild');
     const frameHeight = isWild ? 224 : 144;
     const imageBaseHeight = frame ? frameHeight : 112;
 
@@ -33,12 +34,12 @@ function Photo({ image, paletteId, frame, scaleFactor, isWild }) {
                 const imageBitmap = await createImageBitmap(new ImageData(pixels, width, height));
 
                 // Recolor the frame if it exists
-                const frameBitmap = frame ? await recolorFrame(frame, palette) : null;
+                const frameBitmap = frame ? await recolorFrame(frame.data, palette) : null;
 
                 // Define offsets based on frame type
                 let offsets = {};
                 if (frame) {
-                    // Example of how to handle a special frame
+                    // Example of how to handle a special frame by its name
                     if (isWild) {
                         offsets = { top: 40, bottom: 72, left: 16, right: 16 };
                     } else {
