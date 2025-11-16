@@ -91,6 +91,7 @@ const Home = () => {
                                     image={saveData.images[i]}
                                     paletteId={palette}
                                     frame={frame}
+                                    isWild={true}
                                     scaleFactor={scaleFactor}
                                 />
                             )

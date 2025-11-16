@@ -4,14 +4,15 @@ import { palettes, applyPalette } from 'gbcam-js';
 import * as styles from './Photo.module.css';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 
-function Photo({ image, paletteId, frame, scaleFactor }) {
+function Photo({ image, paletteId, frame, scaleFactor, isWild }) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
     const saveScale = 10;
     const palette = palettes[paletteId];
     const displayScale = scaleFactor;
     const imageBaseWidth = frame ? 160 : 128;
-    const imageBaseHeight = frame ? 144 : 112;
+    const frameHeight = isWild ? 224 : 144;
+    const imageBaseHeight = frame ? frameHeight : 112;
 
     // CSS settings
     const canvasPadding = frame ? '0' : 16 * displayScale + 'px';
@@ -34,8 +35,25 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                 // Recolor the frame if it exists
                 const frameBitmap = frame ? await recolorFrame(frame, palette) : null;
 
+                // Define offsets based on frame type
+                let offsets = {};
+                if (frame) {
+                    // Example of how to handle a special frame
+                    if (isWild) {
+                        offsets = { top: 40, bottom: 72, left: 16, right: 16 };
+                    } else {
+                        offsets = { top: 16, bottom: 16, left: 16, right: 16 };
+                    }
+                }
+
                 // Use an OffscreenCanvas for composition
-                const compositionCanvas = composeImage(imageBitmap, frameBitmap, width, height);
+                const compositionCanvas = composeImage(
+                    imageBitmap,
+                    frameBitmap,
+                    width,
+                    height,
+                    offsets
+                );
 
                 // Create and prepare the save canvas in memory
                 const saveCanvas = new OffscreenCanvas(

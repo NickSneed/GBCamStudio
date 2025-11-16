@@ -60,18 +60,24 @@ export async function recolorFrame(frame, newPaletteColors) {
  * @param {ImageBitmap | null} frameBitmap - The frame image (optional).
  * @param {number} width - The width of the main image.
  * @param {number} height - The height of the main image.
+ * @param {Object} offsets - The offsets for the frame.
  * @returns {OffscreenCanvas} The canvas with the composed image.
  */
-export function composeImage(imageBitmap, frameBitmap, width, height) {
-    const frameOffset = frameBitmap ? 32 : 0;
-    const compositeWidth = width + frameOffset;
-    const compositeHeight = height + frameOffset;
+export function composeImage(imageBitmap, frameBitmap, width, height, offsets) {
+    const {
+        top = frameBitmap ? 16 : 0,
+        bottom = frameBitmap ? 16 : 0,
+        left = frameBitmap ? 16 : 0,
+        right = frameBitmap ? 16 : 0
+    } = offsets || {};
+    const compositeWidth = width + left + right;
+    const compositeHeight = height + top + bottom;
 
     const compositionCanvas = new OffscreenCanvas(compositeWidth, compositeHeight);
     const ctx = compositionCanvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
 
-    ctx.drawImage(imageBitmap, frameOffset / 2, frameOffset / 2, width, height);
+    ctx.drawImage(imageBitmap, left, top, width, height);
     if (frameBitmap) {
         ctx.drawImage(frameBitmap, 0, 0, compositeWidth, compositeHeight);
     }
