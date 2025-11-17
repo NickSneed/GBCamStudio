@@ -70,11 +70,13 @@ h3 {
 }
 
 select {
+    font-size: inherit;
     padding: 0.5em;
     width: 100%;
 }
 
 button {
+    color: var(--c-copy);
     cursor: pointer;
 }
 
