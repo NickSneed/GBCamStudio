@@ -49,7 +49,7 @@ const PaletteSelector = ({ selectedPalette, onPaletteChange }) => {
                                             isSelected
                                                 ? {
                                                       borderColor:
-                                                          'color-mix(in srgb, var(--c-modalcontent) 20%, #fff)'
+                                                          'color-mix(in srgb, var(--c-modalcopy) 20%, #fff)'
                                                   }
                                                 : null
                                         }

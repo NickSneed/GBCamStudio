@@ -4,7 +4,7 @@
 }
 
 .swatchContainer {
-    border: 2px solid var(--c-modalcontent);
+    border: 2px solid var(--c-modalcopy);
     display: flex;
     height: 20px;
     margin: 0 auto 4px auto;
@@ -15,7 +15,7 @@
 
 .swatchContainer:hover,
 .swatchContainer:active {
-    border-color: color-mix(in srgb, var(--c-modalcontent) 40%, #fff);
+    border-color: color-mix(in srgb, var(--c-modalcopy) 40%, #fff);
 }
 
 .swatchColorBlock {
@@ -31,6 +31,5 @@
     display: block;
     margin: 4px;
     cursor: pointer;
-    font-size: 12px;
     text-align: center;
 }

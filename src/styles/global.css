@@ -1,5 +1,6 @@
 :root {
     /* main ui */
+    --c-copy: #171717;
     --c-messagecopy: #4b4b4b;
     --c-background: #cfcfcf;
     --c-button: #aaa;
@@ -8,7 +9,7 @@
 
     /* modal */
     --c-modal: #aaa;
-    --c-modalcontent: #171717;
+    --c-modalcopy: var(--c-copy);
 
     /* toobar colors */
     --c-green: #169e78;
@@ -47,14 +48,15 @@
 
 body {
     background-color: var(--c-background);
+    color: var(--c-copy);
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: normal;
-    padding: 40px 10px;
+    padding: 20px 10px;
     font-family: var(--f-regular);
     font-weight: 400;
     font-style: normal;
-    letter-spacing: 0px;
+    letter-spacing: 0;
 }
 
 div {
@@ -68,7 +70,7 @@ h3 {
 }
 
 select {
-    padding: 4px;
+    padding: 0.5em;
     width: 100%;
 }
 
@@ -102,9 +104,9 @@ button {
     background-color: transparent;
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 12px;
+    font-size: inherit;
     font-family: var(--f-regular);
-    height: 4em;
+    height: 3.5em;
     padding: 0.8em;
     width: 100%;
 }
@@ -153,7 +155,7 @@ label {
 }
 
 .photoGrid {
-    padding: 0 0 200px;
+    padding: 0 0 240px;
     display: grid;
     gap: 10px;
 }
@@ -173,15 +175,15 @@ label {
 }
 
 .closeButton {
-    background: var(--c-modalcontent);
+    background: var(--c-modalcopy);
     display: block;
     border: none;
     color: var(--c-modal);
     font-family: var(--f-regular);
-    font-size: 2em;
-    height: 1.4em;
+    font-size: 1.8em;
+    height: 1.3em;
     line-height: 1;
-    width: 1.4em;
+    width: 1.3em;
 }
 
 @media (min-width: 1280px) {

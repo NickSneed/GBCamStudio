@@ -17,10 +17,10 @@ const SettingsMenu = ({
                     checked={isShowDeleted}
                     onChange={(e) => setIsShowDeleted(e.target.checked)}
                 />
-                Show Deleted
+                Show deleted
             </label>
             <label>
-                Scale:{' '}
+                Photo scale:{' '}
                 <select
                     className="select"
                     value={scaleFactor}
@@ -33,7 +33,7 @@ const SettingsMenu = ({
                 </select>
             </label>
             <label>
-                Color:{' '}
+                UI color:{' '}
                 <select
                     className="select"
                     value={color}
