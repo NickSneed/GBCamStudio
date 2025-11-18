@@ -7,18 +7,12 @@ const SettingsMenu = ({
     scaleFactor,
     setScaleFactor,
     color,
-    setColor
+    setColor,
+    isReversed,
+    setIsReversed
 }) => {
     return (
         <div className={styles.settings}>
-            <label>
-                <input
-                    type="checkbox"
-                    checked={isShowDeleted}
-                    onChange={(e) => setIsShowDeleted(e.target.checked)}
-                />
-                Show deleted
-            </label>
             <label>
                 Photo scale:{' '}
                 <select
@@ -45,6 +39,25 @@ const SettingsMenu = ({
                     <option>blue</option>
                 </select>
             </label>
+            <label>
+                Sort order:{' '}
+                <select
+                    className="select"
+                    value={isReversed}
+                    onChange={(e) => setIsReversed(e.target.value === 'true')}
+                >
+                    <option value="true">new - old</option>
+                    <option value="false">old - new</option>
+                </select>
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isShowDeleted}
+                    onChange={(e) => setIsShowDeleted(e.target.checked)}
+                />
+                Show deleted
+            </label>
         </div>
     );
 };
@@ -57,5 +70,7 @@ SettingsMenu.propTypes = {
     scaleFactor: PropTypes.number.isRequired,
     setScaleFactor: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
-    setColor: PropTypes.func.isRequired
+    setColor: PropTypes.func.isRequired,
+    isReversed: PropTypes.bool.isRequired,
+    setIsReversed: PropTypes.func.isRequired
 };

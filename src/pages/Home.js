@@ -14,6 +14,10 @@ const Home = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isShowDeleted, setIsShowDeleted] = useState(getItem('isShowDeleted') || false);
     const [color, setColor] = useState(getItem('color') || 'green');
+    const initialIsReversed = getItem('isReversed');
+    const [isReversed, setIsReversed] = useState(
+        initialIsReversed === null ? true : initialIsReversed
+    );
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -31,6 +35,10 @@ const Home = () => {
     useEffect(() => {
         setItem('color', color);
     }, [color]);
+
+    useEffect(() => {
+        setItem('isReversed', isReversed);
+    }, [isReversed]);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -71,6 +79,19 @@ const Home = () => {
         }
     };
 
+    const imagesToRender = Array.from({ length: 30 }, (_, i) => {
+        const image = saveData?.images[i];
+        if (image && (!image.isDeleted || isShowDeleted)) {
+            image.index = i;
+            return image;
+        }
+        return null;
+    }).filter(Boolean);
+
+    if (isReversed) {
+        imagesToRender.reverse();
+    }
+
     return (
         <>
             {saveData ? (
@@ -81,21 +102,16 @@ const Home = () => {
                             'repeat(auto-fit, minmax(' + 160 * scaleFactor + 'px, 1fr))'
                     }}
                 >
-                    {Array.from(
-                        { length: 30 },
-                        (_, i) =>
-                            saveData.images[i] &&
-                            (!saveData.images[i].isDeleted || isShowDeleted) && (
-                                <Photo
-                                    key={i}
-                                    image={saveData.images[i]}
-                                    paletteId={palette}
-                                    frame={frame}
-                                    isWild={true}
-                                    scaleFactor={scaleFactor}
-                                />
-                            )
-                    )}
+                    {imagesToRender.map((image) => (
+                        <Photo
+                            key={image.index}
+                            image={image}
+                            paletteId={palette}
+                            frame={frame}
+                            isWild={true}
+                            scaleFactor={scaleFactor}
+                        />
+                    ))}
                     <div style={{ clear: 'both' }}></div>
                 </div>
             ) : null}
@@ -115,6 +131,8 @@ const Home = () => {
                 type="small"
             >
                 <SettingsMenu
+                    isReversed={isReversed}
+                    setIsReversed={setIsReversed}
                     isShowDeleted={isShowDeleted}
                     setIsShowDeleted={setIsShowDeleted}
                     scaleFactor={scaleFactor}
