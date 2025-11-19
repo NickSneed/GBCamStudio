@@ -115,7 +115,6 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
     return (
         <>
             <div className={styles.photo}>
-                {image.comment || null}
                 <div className={styles.canvasContainer}>
                     <canvas
                         className={styles.canvas}

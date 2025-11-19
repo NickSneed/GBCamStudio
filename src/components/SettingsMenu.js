@@ -42,18 +42,18 @@ const SettingsMenu = ({
             <label>
                 <input
                     type="checkbox"
-                    checked={isShowDeleted}
-                    onChange={(e) => setIsShowDeleted(e.target.checked)}
-                />
-                Show deleted
-            </label>
-            <label>
-                <input
-                    type="checkbox"
                     checked={isReversed}
                     onChange={(e) => setIsReversed(e.target.checked)}
                 />
                 Reverse order
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isShowDeleted}
+                    onChange={(e) => setIsShowDeleted(e.target.checked)}
+                />
+                Show deleted
             </label>
         </div>
     );

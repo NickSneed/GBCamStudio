@@ -79,7 +79,7 @@ const Home = () => {
         }
     };
 
-    const imagesToRender = Array.from({ length: 30 }, (_, i) => {
+    const allImages = Array.from({ length: 30 }, (_, i) => {
         const image = saveData?.images[i];
         if (image && (!image.isDeleted || isShowDeleted)) {
             image.index = i;
@@ -88,9 +88,15 @@ const Home = () => {
         return null;
     }).filter(Boolean);
 
+    const activeImages = allImages.filter((image) => !image.isDeleted);
+    const deletedImages = allImages.filter((image) => image.isDeleted);
+
     if (isReversed) {
-        imagesToRender.reverse();
+        activeImages.reverse();
+        deletedImages.reverse();
     }
+
+    const imagesToRender = [...activeImages, ...deletedImages];
 
     return (
         <>
