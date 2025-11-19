@@ -120,8 +120,10 @@ button {
     height: calc(100% - 8px);
 }
 
-button:hover {
-    background-color: color-mix(in srgb, var(--c-button) 60%, #fff);
+@media (hover: hover) {
+    button:hover {
+        background-color: color-mix(in srgb, var(--c-button) 60%, #fff);
+    }
 }
 
 button:active {

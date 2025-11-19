@@ -40,23 +40,20 @@ const SettingsMenu = ({
                 </select>
             </label>
             <label>
-                Sort order:{' '}
-                <select
-                    className="select"
-                    value={isReversed}
-                    onChange={(e) => setIsReversed(e.target.value === 'true')}
-                >
-                    <option value="true">new - old</option>
-                    <option value="false">old - new</option>
-                </select>
-            </label>
-            <label>
                 <input
                     type="checkbox"
                     checked={isShowDeleted}
                     onChange={(e) => setIsShowDeleted(e.target.checked)}
                 />
                 Show deleted
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isReversed}
+                    onChange={(e) => setIsReversed(e.target.checked)}
+                />
+                Reverse order
             </label>
         </div>
     );
