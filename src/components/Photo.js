@@ -4,7 +4,7 @@ import { palettes, applyPalette } from 'gbcam-js';
 import * as styles from './Photo.module.css';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 
-function Photo({ image, paletteId, frame, scaleFactor }) {
+function Photo({ image, paletteId, frame, scaleFactor, showExport, showDeletedFlag, onClick }) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
     const saveScale = 10;
@@ -114,9 +114,14 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
 
     return (
         <>
-            <div className={styles.photo}>
+            <div
+                className={styles.photo}
+                onClick={onClick}
+            >
                 <div className={styles.canvasContainer}>
-                    {image.isDeleted ? <div className={styles.deleted}>d</div> : null}
+                    {image.isDeleted && showDeletedFlag ? (
+                        <div className={styles.deleted}>d</div>
+                    ) : null}
                     <canvas
                         className={styles.canvas}
                         width={canvasWidth}
@@ -129,12 +134,14 @@ function Photo({ image, paletteId, frame, scaleFactor }) {
                         ref={canvasRefDisplay}
                     ></canvas>
                 </div>
-                <button
-                    className="button"
-                    onClick={handleExport}
-                >
-                    Export<span> as PNG</span>
-                </button>
+                {showExport ? (
+                    <button
+                        className="button"
+                        onClick={handleExport}
+                    >
+                        Export<span> as PNG</span>
+                    </button>
+                ) : null}
             </div>
         </>
     );
@@ -144,7 +151,10 @@ Photo.propTypes = {
     image: PropTypes.object,
     paletteId: PropTypes.string,
     frame: PropTypes.object,
-    scaleFactor: PropTypes.number
+    scaleFactor: PropTypes.number,
+    showExport: PropTypes.bool,
+    showDeletedFlag: PropTypes.bool,
+    onClick: PropTypes.func
 };
 
 export default Photo;

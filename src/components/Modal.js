@@ -9,7 +9,9 @@ const Modal = ({ isOpen, setIsSettingsOpen, title, children, type }) => {
             style={{ display: isOpen ? 'flex' : 'none' }}
         >
             <div
-                className={`${styles.modal} ${type === 'small' ? styles.small : ''}`}
+                className={`${styles.modal} ${type === 'small' ? styles.small : ''} ${
+                    type === 'full' ? styles.full : ''
+                }`}
                 onClick={(e) => e.stopPropagation()}
             >
                 <button

@@ -12,6 +12,7 @@ const Home = () => {
     const [scaleFactor, setScaleFactor] = useState(getItem('scaleFactor') || 2);
     const [mainMessage, setMainMessage] = useState('Select a .sav file');
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [editImage, setEditImage] = useState(null);
     const [isShowDeleted, setIsShowDeleted] = useState(getItem('isShowDeleted') || false);
     const [color, setColor] = useState(getItem('color') || 'green');
     const initialIsReversed = getItem('isReversed');
@@ -116,8 +117,10 @@ const Home = () => {
                             image={image}
                             paletteId={palette}
                             frame={frame}
-                            isWild={true}
                             scaleFactor={scaleFactor}
+                            showExport={true}
+                            showDeletedFlag={true}
+                            //onClick={() => setEditImage(image)}
                         />
                     ))}
                     <div style={{ clear: 'both' }}></div>
@@ -132,6 +135,19 @@ const Home = () => {
                     {mainMessage}
                 </div>
             ) : null}
+            <Modal
+                isOpen={editImage}
+                setIsSettingsOpen={setEditImage}
+                title="Edit"
+                type="full"
+            >
+                <Photo
+                    image={editImage}
+                    paletteId={palette}
+                    frame={frame}
+                    scaleFactor={scaleFactor}
+                />
+            </Modal>
             <Modal
                 isOpen={isSettingsOpen}
                 setIsSettingsOpen={setIsSettingsOpen}

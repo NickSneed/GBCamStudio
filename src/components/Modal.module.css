@@ -36,6 +36,10 @@
     max-width: 500px;
 }
 
+.modal.full {
+    height: calc(100vh - 2em);
+}
+
 .modal .close {
     box-shadow: 0 0 0 0.4em var(--c-modal);
     position: absolute;
