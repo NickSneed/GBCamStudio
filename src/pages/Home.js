@@ -137,7 +137,7 @@ const Home = () => {
             <Modal
                 isOpen={editImage}
                 setIsSettingsOpen={setEditImage}
-                title="Edit"
+                title="View"
                 type="full"
                 allowScroll={false}
             >
