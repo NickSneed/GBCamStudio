@@ -140,7 +140,6 @@ const Home = () => {
                 setIsSettingsOpen={setEditImage}
                 title="View"
                 type="full"
-                allowScroll={false}
             >
                 <EditModal
                     editImage={editImage}

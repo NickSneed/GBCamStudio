@@ -30,10 +30,6 @@
     width: 100% !important;
 }
 
-.scale .canvasContainer {
-    height: calc(100% - 50px);
-}
-
 .photo :global(.button) {
     margin: 0 auto;
     max-width: 200px;
