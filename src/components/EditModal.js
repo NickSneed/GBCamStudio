@@ -9,12 +9,10 @@ const EditModal = ({ editImage, palette, frame }) => {
     const [effect, setEffect] = useState('none');
 
     useEffect(() => {
-        if (effect === 'none') {
-            setEditedImage(editImage);
+        if (!editImage) {
+            return;
         }
-    }, [editImage]);
 
-    useEffect(() => {
         if (editedImage && effect && effect !== 'none') {
             let newPhotoData = editImage.photoData;
             newPhotoData = applyEffect(newPhotoData, effect);
@@ -23,7 +21,11 @@ const EditModal = ({ editImage, palette, frame }) => {
                 photoData: newPhotoData
             });
         }
-    }, [effect]);
+
+        if (effect === 'none') {
+            setEditedImage(editImage);
+        }
+    }, [effect, editImage]);
 
     return (
         <div className={styles.editWrapper}>
