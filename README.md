@@ -21,6 +21,9 @@ GBCamStudio is a web-based utility that allows you to view, customize, and expor
 4.  Use the toolbar to change the palette, add a frame, or adjust other settings.
 5.  Click on any photo to see a larger preview and use the "Export as PNG" button to save it.
 
-## Google Icons
+## To do
 
-https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3
+-   Add pixel editor
+-   Use arrow keys to switch edit photo
+-   Add dark mode to modals
+-   Add Montage
