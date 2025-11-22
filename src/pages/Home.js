@@ -20,8 +20,12 @@ const Home = () => {
     const [isReversed, setIsReversed] = useState(
         initialIsReversed === null ? true : initialIsReversed
     );
-    const [montagePhotos, setMontagePhotos] = useState(null);
+    const [selectedPhotos, setSelectedPhotos] = useState([]);
     const fileInputRef = useRef(null);
+
+    useEffect(() => {
+        setSelectedPhotos([]);
+    }, [saveData]);
 
     useEffect(() => {
         setItem('palette', palette);
@@ -73,11 +77,6 @@ const Home = () => {
             ) {
                 setMainMessage('No images found');
             }
-            setMontagePhotos([
-                saveData.images[0].photoData,
-                saveData.images[1].photoData,
-                saveData.images[2].photoData
-            ]);
         } else {
             setMainMessage('Select a .sav file');
         }
@@ -88,6 +87,21 @@ const Home = () => {
             fileInputRef.current.click();
         }
     };
+
+    const handlePhotoSelect = (imageIndex, isSelected) => {
+        if (isSelected) {
+            if (selectedPhotos.length < 3) {
+                const image = saveData.images[imageIndex];
+                setSelectedPhotos((prev) => [...prev, image]);
+            }
+        } else {
+            setSelectedPhotos((prev) => prev.filter((p) => p.index !== imageIndex));
+        }
+    };
+
+    const montagePhotos = selectedPhotos.map((photo) => photo.photoData);
+
+    const isSelectionFull = selectedPhotos.length >= 3;
 
     const allImages = Array.from({ length: 30 }, (_, i) => {
         const image = saveData?.images[i];
@@ -118,17 +132,23 @@ const Home = () => {
                             'repeat(auto-fit, minmax(' + 160 * scaleFactor + 'px, 1fr))'
                     }}
                 >
-                    {imagesToRender.map((image) => (
-                        <Photo
-                            key={image.index}
-                            image={image}
-                            paletteId={palette}
-                            frame={frame}
-                            scaleFactor={scaleFactor}
-                            showDeletedFlag={true}
-                            onClick={() => setEditImage(image)}
-                        />
-                    ))}
+                    {imagesToRender.map((image) => {
+                        const isSelected = selectedPhotos.some((p) => p.index === image.index);
+                        return (
+                            <Photo
+                                key={image.index}
+                                image={image}
+                                paletteId={palette}
+                                frame={frame}
+                                scaleFactor={scaleFactor}
+                                showDeletedFlag={true}
+                                onClick={() => setEditImage(image)}
+                                onSelect={handlePhotoSelect}
+                                isSelected={isSelected}
+                                isDisabled={!isSelected && isSelectionFull}
+                            />
+                        );
+                    })}
                     <div style={{ clear: 'both' }}></div>
                 </div>
             ) : null}

@@ -46,6 +46,16 @@
     bottom: -3.1em;
 }
 
+.controls :global(.button),
+.controls label {
+    display: inline-block;
+    margin: 0 0.7em;
+}
+
+.controls label span {
+    margin: 0;
+}
+
 :global(.scale1) .photo button span {
     display: none;
 }

@@ -18,7 +18,7 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
             return;
         }
 
-        const isMontage = montagePhotos && montageType !== 'none';
+        const isMontage = montagePhotos?.length > 0 && montageType !== 'none';
 
         if ((editedImage && effect && effect !== 'none') || isMontage) {
             let newPhotoData = isMontage
@@ -192,7 +192,7 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
                         <option value="6">6</option>
                     </select>
                 </label>
-                {montagePhotos ? (
+                {montagePhotos?.length > 0 ? (
                     <label>
                         Montage type:
                         <select

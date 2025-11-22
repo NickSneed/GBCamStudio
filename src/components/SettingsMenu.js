@@ -39,20 +39,22 @@ const SettingsMenu = ({
                     <option>blue</option>
                 </select>
             </label>
-            <label>
+            <label className="pixel-checkbox">
                 <input
                     type="checkbox"
                     checked={isReversed}
                     onChange={(e) => setIsReversed(e.target.checked)}
                 />
+                <span></span>
                 Reverse order
             </label>
-            <label>
+            <label className="pixel-checkbox">
                 <input
                     type="checkbox"
                     checked={isShowDeleted}
                     onChange={(e) => setIsShowDeleted(e.target.checked)}
                 />
+                <span></span>
                 Show deleted
             </label>
         </div>

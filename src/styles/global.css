@@ -206,3 +206,45 @@ label {
         gap: 20px;
     }
 }
+
+.pixel-checkbox {
+    display: block;
+    cursor: pointer;
+}
+
+.pixel-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.pixel-checkbox span {
+    background-color: #fff;
+    border: 2px solid var(--c-copy);
+    display: inline-block;
+    height: 1.5em;
+    margin-right: 0.5em;
+    position: relative;
+    vertical-align: middle;
+    width: 1.5em;
+}
+
+.pixel-checkbox input:checked ~ span:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid var(--c-copy);
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+}
+
+.pixel-checkbox input:disabled ~ span {
+    cursor: not-allowed;
+    background-color: var(--c-button);
+    border-color: var(--c-messagecopy);
+}

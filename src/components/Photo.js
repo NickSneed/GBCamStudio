@@ -5,7 +5,18 @@ import * as styles from './Photo.module.css';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 import { getFrameOffsets } from '../utils/frameUtils.js';
 
-function Photo({ image, paletteId, frame, scaleFactor, showDeletedFlag, isScale, onClick }) {
+function Photo({
+    image,
+    paletteId,
+    frame,
+    scaleFactor,
+    showDeletedFlag,
+    isScale,
+    onClick,
+    onSelect,
+    isSelected,
+    isDisabled
+}) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
     const saveScale = 10;
@@ -132,13 +143,25 @@ function Photo({ image, paletteId, frame, scaleFactor, showDeletedFlag, isScale,
                 ) : (
                     <div className={styles.canvasContainer}>{canvasMarkup}</div>
                 )}
-
-                <button
-                    className="button"
-                    onClick={handleExport}
-                >
-                    Export<span> as PNG</span>
-                </button>
+                <div className={styles.controls}>
+                    <button
+                        className="button"
+                        onClick={handleExport}
+                    >
+                        Export<span> as PNG</span>
+                    </button>
+                    {onSelect ? (
+                        <label className="pixel-checkbox">
+                            <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => onSelect(image.index, e.target.checked)}
+                                disabled={isDisabled}
+                            />
+                            <span></span>
+                        </label>
+                    ) : null}
+                </div>
             </div>
         </>
     );
@@ -151,7 +174,10 @@ Photo.propTypes = {
     scaleFactor: PropTypes.number,
     showDeletedFlag: PropTypes.bool,
     isScale: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onSelect: PropTypes.func,
+    isSelected: PropTypes.bool,
+    isDisabled: PropTypes.bool
 };
 
 export default Photo;
