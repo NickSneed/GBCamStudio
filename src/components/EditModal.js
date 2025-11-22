@@ -8,6 +8,7 @@ const EditModal = ({ editImage, palette, frame }) => {
     const [editedImage, setEditedImage] = useState(editImage);
     const [effect, setEffect] = useState('none');
     const [color, setColor] = useState(0);
+    const [isDrawing, setIsDrawing] = useState(false);
 
     useEffect(() => {
         if (!editImage) {
@@ -28,7 +29,7 @@ const EditModal = ({ editImage, palette, frame }) => {
         }
     }, [effect, editImage]);
 
-    const handleCanvasClick = (e) => {
+    const drawOnCanvas = (e) => {
         const canvas = e.currentTarget.querySelector('canvas');
         if (canvas) {
             const rect = canvas.getBoundingClientRect();
@@ -56,6 +57,20 @@ const EditModal = ({ editImage, palette, frame }) => {
         }
     };
 
+    const handleMouseDown = (e) => {
+        setIsDrawing(true);
+        drawOnCanvas(e);
+    };
+
+    const handleMouseMove = (e) => {
+        if (isDrawing) {
+            drawOnCanvas(e);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDrawing(false);
+    };
     return (
         <div className={styles.editWrapper}>
             Effect:
@@ -86,14 +101,19 @@ const EditModal = ({ editImage, palette, frame }) => {
                 <option value="2">3</option>
                 <option value="3">4</option>
             </select>
-            <div className={styles.photo}>
+            <div
+                className={styles.photo}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp} // Stop drawing if mouse leaves the area
+            >
                 <Photo
                     image={editedImage}
                     paletteId={palette}
                     frame={frame}
                     scaleFactor={4}
                     isScale={true}
-                    onClick={handleCanvasClick}
                 />
             </div>
         </div>
