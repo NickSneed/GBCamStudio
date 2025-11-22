@@ -9,6 +9,7 @@ const EditModal = ({ editImage, palette, frame }) => {
     const [editedImage, setEditedImage] = useState(editImage);
     const [effect, setEffect] = useState('none');
     const [color, setColor] = useState(0);
+    const [brushSize, setBrushSize] = useState(1);
     const [isDrawing, setIsDrawing] = useState(false);
 
     useEffect(() => {
@@ -44,17 +45,22 @@ const EditModal = ({ editImage, palette, frame }) => {
             const unscaledX = Math.floor(x / scale - offsets.left);
             const unscaledY = Math.floor(y / scale - offsets.top);
             const imageWidth = 128;
-            const index = unscaledY * imageWidth + unscaledX;
+            const imageHeight = 112;
 
-            if (unscaledX >= 0 && unscaledX < imageWidth && unscaledY >= 0 && unscaledY < 112) {
-                const newPhotoData = [...editedImage.photoData];
-                newPhotoData[index] = Number(color);
+            const newPhotoData = [...editedImage.photoData];
+            const size = Number(brushSize);
 
-                setEditedImage({
-                    ...editedImage,
-                    photoData: newPhotoData
-                });
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const drawX = unscaledX + i;
+                    const drawY = unscaledY + j;
+                    if (drawX >= 0 && drawX < imageWidth && drawY >= 0 && drawY < imageHeight) {
+                        const index = drawY * imageWidth + drawX;
+                        newPhotoData[index] = Number(color);
+                    }
+                }
             }
+            setEditedImage({ ...editedImage, photoData: newPhotoData });
         }
     };
 
@@ -117,10 +123,23 @@ const EditModal = ({ editImage, palette, frame }) => {
                         value={color}
                         onChange={(e) => setColor(e.target.value)}
                     >
-                        <option value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option>
+                        <option value="0">Lightest</option>
+                        <option value="1">Light</option>
+                        <option value="2">Dark</option>
+                        <option value="3">Darkest</option>
+                    </select>
+                </label>
+                <label>
+                    Brush Size:
+                    <select
+                        className={styles.select}
+                        value={brushSize}
+                        onChange={(e) => setBrushSize(e.target.value)}
+                    >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                 </label>
             </div>
