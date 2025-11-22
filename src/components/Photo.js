@@ -1,19 +1,10 @@
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
-import { palettes, applyPalette, applyEffect } from 'gbcam-js';
+import { palettes, applyPalette } from 'gbcam-js';
 import * as styles from './Photo.module.css';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 
-function Photo({
-    image,
-    paletteId,
-    frame,
-    scaleFactor,
-    showDeletedFlag,
-    isScale,
-    onClick,
-    effect
-}) {
+function Photo({ image, paletteId, frame, scaleFactor, showDeletedFlag, isScale, onClick }) {
     const canvasRefSave = useRef(null);
     const canvasRefDisplay = useRef(null);
     const saveScale = 10;
@@ -36,10 +27,8 @@ function Photo({
             try {
                 const { width, height, photoData } = image;
 
-                const photoDataEffect = effect ? applyEffect(photoData, effect) : photoData;
-
                 // Apply the color palette to the photo
-                const pixels = applyPalette(photoDataEffect, palette);
+                const pixels = applyPalette(photoData, palette);
 
                 // Create a bitmap from the raw image data for efficient drawing
                 const imageBitmap = await createImageBitmap(new ImageData(pixels, width, height));
@@ -99,7 +88,7 @@ function Photo({
                 console.log(error);
             }
         })();
-    }, [image, palette, frame, saveScale, displayScale, canvasHeight, canvasWidth, effect]);
+    }, [image, palette, frame, saveScale, displayScale, canvasHeight, canvasWidth]);
 
     const handleExport = async () => {
         const canvas = canvasRefSave.current;
@@ -171,8 +160,7 @@ Photo.propTypes = {
     scaleFactor: PropTypes.number,
     showDeletedFlag: PropTypes.bool,
     isScale: PropTypes.bool,
-    onClick: PropTypes.func,
-    effect: PropTypes.string
+    onClick: PropTypes.func
 };
 
 export default Photo;

@@ -37,9 +37,9 @@
 }
 
 .deleted {
+    background: var(--c-red);
     border: 2px solid #fff;
     color: #fff;
-    background: var(--c-red);
     padding: 0.2em;
     position: absolute;
     right: 0;

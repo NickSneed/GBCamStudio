@@ -1,10 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Photo from '../components/Photo.js';
 import * as styles from './EditModal.module.css';
+import { applyEffect } from 'gbcam-js';
 
 const EditModal = ({ editImage, palette, frame }) => {
+    const [editedImage, setEditedImage] = useState(editImage);
     const [effect, setEffect] = useState('none');
+
+    useEffect(() => {
+        if (effect === 'none') {
+            setEditedImage(editImage);
+        }
+    }, [editImage]);
+
+    useEffect(() => {
+        if (editedImage && effect && effect !== 'none') {
+            let newPhotoData = editImage.photoData;
+            newPhotoData = applyEffect(newPhotoData, effect);
+            setEditedImage({
+                ...editedImage,
+                photoData: newPhotoData
+            });
+        }
+    }, [effect]);
 
     return (
         <div className={styles.editWrapper}>
@@ -27,12 +46,11 @@ const EditModal = ({ editImage, palette, frame }) => {
             </select>
             <div className={styles.photo}>
                 <Photo
-                    image={editImage}
+                    image={editedImage}
                     paletteId={palette}
                     frame={frame}
                     scaleFactor={4}
                     isScale={true}
-                    effect={effect === 'none' ? null : effect}
                 />
             </div>
         </div>

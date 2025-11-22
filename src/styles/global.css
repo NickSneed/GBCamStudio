@@ -79,6 +79,7 @@ select {
 
 button {
     cursor: pointer;
+    font-family: 'DogicaPixel';
     padding: 0;
 }
 
