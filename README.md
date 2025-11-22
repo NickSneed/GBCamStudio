@@ -23,7 +23,6 @@ GBCamStudio is a web-based utility that allows you to view, customize, and expor
 
 ## To do
 
--   Add pixel editor
 -   Use arrow keys to switch edit photo
 -   Add dark mode to modals
 -   Add Montage
