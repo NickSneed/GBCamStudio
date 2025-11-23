@@ -30,3 +30,4 @@ GBCamStudio is a web-based utility that allows you to view, customize, and expor
 -   Add undo to the pixel editor
 -   Add percise cursor
 -   Add stamps
+-   Add help docs
