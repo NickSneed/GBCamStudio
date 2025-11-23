@@ -10,6 +10,7 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
     const [color, setColor] = useState(0);
     const [brushSize, setBrushSize] = useState(1);
     const [montageType, setMontageType] = useState('none');
+    const [paletteOrder, setPaletteOrder] = useState('normal');
 
     const { editedImage, setEditedImage, drawHandlers } = useCanvasDrawer(
         editImage,
@@ -82,6 +83,7 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
                     scaleFactor={4}
                     isScale={true}
                     drawHandlers={drawHandlers}
+                    paletteOrder={paletteOrder}
                 />
             </div>
             <div className={styles.controls}>
@@ -130,6 +132,21 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
+                    </select>
+                </label>
+                <label>
+                    Palette Order:
+                    <select
+                        className={styles.select}
+                        value={paletteOrder}
+                        onChange={(e) => setPaletteOrder(e.target.value)}
+                    >
+                        <option value="normal">normal</option>
+                        <option value="i">invert</option>
+                        <option value="pa">a</option>
+                        <option value="pb">b</option>
+                        <option value="pc">c</option>
+                        <option value="pd">d</option>
                     </select>
                 </label>
                 {montagePhotos?.length > 0 ? (

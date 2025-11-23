@@ -15,13 +15,15 @@ function Photo({
     onSelect,
     isSelected,
     isDisabled,
-    drawHandlers
+    drawHandlers,
+    paletteOrder
 }) {
     const { displayCanvasRef, saveCanvasRef } = usePhotoRenderer(
         image,
         paletteId,
         frame,
-        scaleFactor
+        scaleFactor,
+        paletteOrder
     );
     const { handleExport } = usePhotoExporter(saveCanvasRef);
     const displayScale = scaleFactor;
@@ -106,7 +108,8 @@ Photo.propTypes = {
         onDrawMove: PropTypes.func,
         onDrawEnd: PropTypes.func,
         onMouseLeave: PropTypes.func
-    })
+    }),
+    paletteOrder: PropTypes.string
 };
 
 export default Photo;

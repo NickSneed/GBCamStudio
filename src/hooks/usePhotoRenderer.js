@@ -3,7 +3,7 @@ import { palettes, applyPalette } from 'gbcam-js';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 import { getFrameOffsets } from '../utils/frameUtils.js';
 
-export const usePhotoRenderer = (image, paletteId, frame, displayScale) => {
+export const usePhotoRenderer = (image, paletteId, frame, displayScale, paletteOrder) => {
     const displayCanvasRef = useRef(null);
     const saveCanvasRef = useRef(null);
     const saveScale = 10;
@@ -17,7 +17,7 @@ export const usePhotoRenderer = (image, paletteId, frame, displayScale) => {
                 const { width, height, photoData } = image;
 
                 // Apply the color palette to the photo
-                const pixels = applyPalette(photoData, palette);
+                const pixels = applyPalette(photoData, palette, paletteOrder);
 
                 // Create a bitmap from the raw image data for efficient drawing
                 const imageBitmap = await createImageBitmap(new ImageData(pixels, width, height));
@@ -67,7 +67,7 @@ export const usePhotoRenderer = (image, paletteId, frame, displayScale) => {
                 console.log(error);
             }
         })();
-    }, [image, palette, frame, displayScale, saveScale]);
+    }, [image, palette, frame, displayScale, saveScale, paletteOrder]);
 
     return { displayCanvasRef, saveCanvasRef };
 };
