@@ -10,18 +10,31 @@ const Home = () => {
     const [saveData, setSaveData] = useState(null);
     const [palette, setPalette] = useState(getItem('palette') || 'sgb2h');
     const [frame, setFrame] = useState(null);
-    const [scaleFactor, setScaleFactor] = useState(getItem('scaleFactor') || 2);
     const [mainMessage, setMainMessage] = useState('Select a .sav file');
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [editImage, setEditImage] = useState(null);
-    const [isShowDeleted, setIsShowDeleted] = useState(getItem('isShowDeleted') || false);
-    const [color, setColor] = useState(getItem('color') || 'green');
-    const initialIsReversed = getItem('isReversed');
-    const [isReversed, setIsReversed] = useState(
-        initialIsReversed === null ? true : initialIsReversed
-    );
+    const [settings, setSettings] = useState(() => {
+        const initialIsReversed = getItem('isReversed');
+        return {
+            scaleFactor: getItem('scaleFactor') || 2,
+            isShowDeleted: getItem('isShowDeleted') || false,
+            color: getItem('color') || 'green',
+            isReversed: initialIsReversed === null ? true : initialIsReversed
+        };
+    });
     const [selectedPhotos, setSelectedPhotos] = useState([]);
     const fileInputRef = useRef(null);
+
+    const handleSettingChange = (event) => {
+        const { name, value, type, checked } = event.target;
+        const newValue =
+            type === 'checkbox' ? checked : name === 'scaleFactor' ? Number(value) : value;
+
+        setSettings((prevSettings) => ({
+            ...prevSettings,
+            [name]: newValue
+        }));
+    };
 
     useEffect(() => {
         setSelectedPhotos([]);
@@ -29,23 +42,11 @@ const Home = () => {
 
     useEffect(() => {
         setItem('palette', palette);
-    }, [palette]);
-
-    useEffect(() => {
-        setItem('scaleFactor', scaleFactor);
-    }, [scaleFactor]);
-
-    useEffect(() => {
-        setItem('isShowDeleted', isShowDeleted);
-    }, [isShowDeleted]);
-
-    useEffect(() => {
-        setItem('color', color);
-    }, [color]);
-
-    useEffect(() => {
-        setItem('isReversed', isReversed);
-    }, [isReversed]);
+        setItem('scaleFactor', settings.scaleFactor);
+        setItem('isShowDeleted', settings.isShowDeleted);
+        setItem('color', settings.color);
+        setItem('isReversed', settings.isReversed);
+    }, [palette, settings]);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -54,10 +55,14 @@ const Home = () => {
 
             if ((event.key === '+' || event.key === '=') && isModKey) {
                 event.preventDefault(); // Prevent browser zoom in
-                setScaleFactor((prevScale) => Math.min(prevScale + 1, 4));
+                handleSettingChange({
+                    target: { name: 'scaleFactor', value: Math.min(settings.scaleFactor + 1, 4) }
+                });
             } else if (event.key === '-' && isModKey) {
                 event.preventDefault(); // Prevent browser zoom out
-                setScaleFactor((prevScale) => Math.max(prevScale - 1, 1));
+                handleSettingChange({
+                    target: { name: 'scaleFactor', value: Math.max(settings.scaleFactor - 1, 1) }
+                });
             }
         };
 
@@ -84,7 +89,9 @@ const Home = () => {
             if (
                 !(
                     saveData.images &&
-                    saveData.images.some((image) => image && (!image.isDeleted || isShowDeleted))
+                    saveData.images.some(
+                        (image) => image && (!image.isDeleted || settings.isShowDeleted)
+                    )
                 )
             ) {
                 setMainMessage('No images found');
@@ -92,7 +99,7 @@ const Home = () => {
         } else {
             setMainMessage('Select a .sav file');
         }
-    }, [saveData, isShowDeleted]);
+    }, [saveData, settings.isShowDeleted]);
 
     const handleMainMessageClick = () => {
         if (fileInputRef.current) {
@@ -117,7 +124,7 @@ const Home = () => {
 
     const allImages = Array.from({ length: 30 }, (_, i) => {
         const image = saveData?.images[i];
-        if (image && (!image.isDeleted || isShowDeleted)) {
+        if (image && (!image.isDeleted || settings.isShowDeleted)) {
             image.index = i;
             return image;
         }
@@ -127,7 +134,7 @@ const Home = () => {
     const activeImages = allImages.filter((image) => !image.isDeleted);
     const deletedImages = allImages.filter((image) => image.isDeleted);
 
-    if (isReversed) {
+    if (settings.isReversed) {
         activeImages.reverse();
         deletedImages.reverse();
     }
@@ -138,10 +145,10 @@ const Home = () => {
         <>
             {saveData ? (
                 <div
-                    className={`photoGrid scale${scaleFactor}`}
+                    className={`photoGrid scale${settings.scaleFactor}`}
                     style={{
                         gridTemplateColumns:
-                            'repeat(auto-fit, minmax(' + 160 * scaleFactor + 'px, 1fr))'
+                            'repeat(auto-fit, minmax(' + 160 * settings.scaleFactor + 'px, 1fr))'
                     }}
                 >
                     {imagesToRender.map((image) => {
@@ -152,7 +159,7 @@ const Home = () => {
                                 image={image}
                                 paletteId={palette}
                                 frame={frame}
-                                scaleFactor={scaleFactor}
+                                scaleFactor={settings.scaleFactor}
                                 showDeletedFlag={true}
                                 onClick={() => setEditImage(image)}
                                 onSelect={handlePhotoSelect}
@@ -193,14 +200,8 @@ const Home = () => {
                 type="small"
             >
                 <SettingsMenu
-                    isReversed={isReversed}
-                    setIsReversed={setIsReversed}
-                    isShowDeleted={isShowDeleted}
-                    setIsShowDeleted={setIsShowDeleted}
-                    scaleFactor={scaleFactor}
-                    setScaleFactor={setScaleFactor}
-                    color={color}
-                    setColor={setColor}
+                    settings={settings}
+                    onSettingChange={handleSettingChange}
                 />
             </Modal>
             <ToolBar
@@ -210,11 +211,9 @@ const Home = () => {
                 setSaveData={setSaveData}
                 frame={frame}
                 setFrame={setFrame}
-                scaleFactor={scaleFactor}
-                setScaleFactor={setScaleFactor}
                 setIsSettingsOpen={setIsSettingsOpen}
                 isSettingsOpen={isSettingsOpen}
-                color={color}
+                color={settings.color}
                 count={imagesToRender.length}
                 ref={fileInputRef}
             />

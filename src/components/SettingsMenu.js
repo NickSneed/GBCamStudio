@@ -1,37 +1,30 @@
 import PropTypes from 'prop-types';
 import * as styles from './SettingsMenu.module.css';
 
-const SettingsMenu = ({
-    isShowDeleted,
-    setIsShowDeleted,
-    scaleFactor,
-    setScaleFactor,
-    color,
-    setColor,
-    isReversed,
-    setIsReversed
-}) => {
+const SettingsMenu = ({ settings, onSettingChange }) => {
     return (
         <div className={styles.settings}>
             <label>
                 Photo scale:{' '}
                 <select
                     className="select"
-                    value={scaleFactor}
-                    onChange={(e) => setScaleFactor(Number(e.target.value))}
+                    name="scaleFactor"
+                    value={settings.scaleFactor}
+                    onChange={onSettingChange}
                 >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
                 </select>
             </label>
             <label>
                 UI color:{' '}
                 <select
                     className="select"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
+                    name="color"
+                    value={settings.color}
+                    onChange={onSettingChange}
                 >
                     <option>red</option>
                     <option>green</option>
@@ -42,8 +35,9 @@ const SettingsMenu = ({
             <label className="pixel-checkbox">
                 <input
                     type="checkbox"
-                    checked={isReversed}
-                    onChange={(e) => setIsReversed(e.target.checked)}
+                    name="isReversed"
+                    checked={settings.isReversed}
+                    onChange={onSettingChange}
                 />
                 <span></span>
                 Reverse order
@@ -51,8 +45,9 @@ const SettingsMenu = ({
             <label className="pixel-checkbox">
                 <input
                     type="checkbox"
-                    checked={isShowDeleted}
-                    onChange={(e) => setIsShowDeleted(e.target.checked)}
+                    name="isShowDeleted"
+                    checked={settings.isShowDeleted}
+                    onChange={onSettingChange}
                 />
                 <span></span>
                 Show deleted
@@ -64,12 +59,11 @@ const SettingsMenu = ({
 export default SettingsMenu;
 
 SettingsMenu.propTypes = {
-    isShowDeleted: PropTypes.bool.isRequired,
-    setIsShowDeleted: PropTypes.func.isRequired,
-    scaleFactor: PropTypes.number.isRequired,
-    setScaleFactor: PropTypes.func.isRequired,
-    color: PropTypes.string.isRequired,
-    setColor: PropTypes.func.isRequired,
-    isReversed: PropTypes.bool.isRequired,
-    setIsReversed: PropTypes.func.isRequired
+    settings: PropTypes.shape({
+        isShowDeleted: PropTypes.bool.isRequired,
+        scaleFactor: PropTypes.number.isRequired,
+        color: PropTypes.string.isRequired,
+        isReversed: PropTypes.bool.isRequired
+    }).isRequired,
+    onSettingChange: PropTypes.func.isRequired
 };
