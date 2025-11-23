@@ -1,0 +1,73 @@
+import { useRef, useEffect } from 'react';
+import { palettes, applyPalette } from 'gbcam-js';
+import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
+import { getFrameOffsets } from '../utils/frameUtils.js';
+
+export const usePhotoRenderer = (image, paletteId, frame, displayScale) => {
+    const displayCanvasRef = useRef(null);
+    const saveCanvasRef = useRef(null);
+    const saveScale = 10;
+    const palette = palettes[paletteId];
+
+    useEffect(() => {
+        if (!image) return;
+
+        (async () => {
+            try {
+                const { width, height, photoData } = image;
+
+                // Apply the color palette to the photo
+                const pixels = applyPalette(photoData, palette);
+
+                // Create a bitmap from the raw image data for efficient drawing
+                const imageBitmap = await createImageBitmap(new ImageData(pixels, width, height));
+
+                // Recolor the frame if it exists
+                const frameBitmap = frame ? await recolorFrame(frame.data, palette) : null;
+
+                const offsets = getFrameOffsets(frame);
+                // Use an OffscreenCanvas for composition
+                const compositionCanvas = composeImage(
+                    imageBitmap,
+                    frameBitmap,
+                    width,
+                    height,
+                    offsets
+                );
+
+                // Create and prepare the save canvas in memory
+                const saveCanvas = new OffscreenCanvas(
+                    compositionCanvas.width * saveScale,
+                    compositionCanvas.height * saveScale
+                );
+                const saveCtx = saveCanvas.getContext('2d');
+                saveCtx.imageSmoothingEnabled = false;
+                saveCtx.drawImage(compositionCanvas, 0, 0, saveCanvas.width, saveCanvas.height);
+
+                // Store the save-ready canvas
+                saveCanvasRef.current = saveCanvas;
+
+                // Scale and draw to the display canvas
+                const displayCanvas = displayCanvasRef.current;
+                if (displayCanvas) {
+                    const displayCtx = displayCanvas.getContext('2d');
+                    const scale = displayScale * 2;
+                    displayCanvas.width = compositionCanvas.width * scale;
+                    displayCanvas.height = compositionCanvas.height * scale;
+                    displayCtx.imageSmoothingEnabled = false;
+                    displayCtx.drawImage(
+                        compositionCanvas,
+                        0,
+                        0,
+                        displayCanvas.width,
+                        displayCanvas.height
+                    );
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, [image, palette, frame, displayScale, saveScale]);
+
+    return { displayCanvasRef, saveCanvasRef };
+};

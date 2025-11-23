@@ -148,9 +148,12 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
                     frame={frame}
                     scaleFactor={4}
                     isScale={true}
-                    onDrawStart={handleDrawStart}
-                    onDrawMove={handleDrawMove}
-                    onDrawEnd={handleDrawEnd}
+                    drawHandlers={{
+                        onDrawStart: handleDrawStart,
+                        onDrawMove: handleDrawMove,
+                        onDrawEnd: handleDrawEnd,
+                        onMouseLeave: handleDrawEnd
+                    }}
                 />
             </div>
             <div className={styles.controls}>
