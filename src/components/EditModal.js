@@ -19,10 +19,6 @@ const EditModal = ({ montagePhotos, editImage, palette, frame }) => {
     );
 
     useEffect(() => {
-        setEditedImage(editImage);
-    }, [editImage, setEditedImage]);
-
-    useEffect(() => {
         if (!editImage) {
             return;
         }
