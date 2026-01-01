@@ -21,7 +21,8 @@ const Home = () => {
             color: getItem('color') || 'green',
             isReversed: initialIsReversed === null ? true : initialIsReversed,
             exportFormat: getItem('exportFormat') || 'png',
-            exportQuality: Number(getItem('exportQuality')) || 0.9
+            exportQuality: Number(getItem('exportQuality')) || 0.9,
+            theme: getItem('theme') || 'system'
         };
     });
     const [selectedPhotos, setSelectedPhotos] = useState([]);
@@ -54,6 +55,7 @@ const Home = () => {
         setItem('isReversed', settings.isReversed);
         setItem('exportFormat', settings.exportFormat);
         setItem('exportQuality', settings.exportQuality);
+        setItem('theme', settings.theme);
     }, [palette, settings]);
 
     useEffect(() => {
@@ -78,6 +80,28 @@ const Home = () => {
 
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const applyTheme = () => {
+            let themeToApply = settings.theme;
+            if (themeToApply === 'system') {
+                themeToApply = mediaQuery.matches ? 'dark' : 'light';
+            }
+            document.body.setAttribute('data-theme', themeToApply);
+        };
+
+        applyTheme();
+
+        const handleSystemChange = () => {
+            if (settings.theme === 'system') {
+                applyTheme();
+            }
+        };
+
+        mediaQuery.addEventListener('change', handleSystemChange);
+        return () => mediaQuery.removeEventListener('change', handleSystemChange);
+    }, [settings.theme]);
 
     useEffect(() => {
         if (editImage || isSettingsOpen) {

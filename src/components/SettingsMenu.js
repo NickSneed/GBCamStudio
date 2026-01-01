@@ -33,6 +33,19 @@ const SettingsMenu = ({ settings, onSettingChange }) => {
                 </select>
             </label>
             <label>
+                Theme:{' '}
+                <select
+                    className="select"
+                    name="theme"
+                    value={settings.theme}
+                    onChange={onSettingChange}
+                >
+                    <option value="system">System</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </label>
+            <label>
                 Export format:{' '}
                 <select
                     className="select"
@@ -95,7 +108,8 @@ SettingsMenu.propTypes = {
         color: PropTypes.string.isRequired,
         isReversed: PropTypes.bool.isRequired,
         exportFormat: PropTypes.string,
-        exportQuality: PropTypes.number
+        exportQuality: PropTypes.number,
+        theme: PropTypes.string
     }).isRequired,
     onSettingChange: PropTypes.func.isRequired
 };

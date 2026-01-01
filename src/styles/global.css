@@ -22,12 +22,10 @@
     --f-bold: 'DogicaPixelBold', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --c-background: #1f1f1f;
-        --c-canvasoutlinelight: color-mix(in srgb, var(--c-background) 90%, #fff);
-        --c-canvasoutlinedark: color-mix(in srgb, var(--c-background) 50%, #000);
-    }
+body[data-theme='dark'] {
+    --c-background: #1f1f1f;
+    --c-canvasoutlinelight: color-mix(in srgb, var(--c-background) 90%, #fff);
+    --c-canvasoutlinedark: color-mix(in srgb, var(--c-background) 50%, #000);
 }
 
 @font-face {
