@@ -32,6 +32,18 @@ const SettingsMenu = ({ settings, onSettingChange }) => {
                     <option>blue</option>
                 </select>
             </label>
+            <label>
+                Export format:{' '}
+                <select
+                    className="select"
+                    name="exportFormat"
+                    value={settings.exportFormat}
+                    onChange={onSettingChange}
+                >
+                    <option value="png">PNG</option>
+                    <option value="jpg">JPG</option>
+                </select>
+            </label>
             <label className="pixel-checkbox">
                 <input
                     type="checkbox"
@@ -63,7 +75,8 @@ SettingsMenu.propTypes = {
         isShowDeleted: PropTypes.bool.isRequired,
         scaleFactor: PropTypes.number.isRequired,
         color: PropTypes.string.isRequired,
-        isReversed: PropTypes.bool.isRequired
+        isReversed: PropTypes.bool.isRequired,
+        exportFormat: PropTypes.string
     }).isRequired,
     onSettingChange: PropTypes.func.isRequired
 };

@@ -19,7 +19,8 @@ const Home = () => {
             scaleFactor: getItem('scaleFactor') || 2,
             isShowDeleted: getItem('isShowDeleted') || false,
             color: getItem('color') || 'green',
-            isReversed: initialIsReversed === null ? true : initialIsReversed
+            isReversed: initialIsReversed === null ? true : initialIsReversed,
+            exportFormat: getItem('exportFormat') || 'png'
         };
     });
     const [selectedPhotos, setSelectedPhotos] = useState([]);
@@ -46,6 +47,7 @@ const Home = () => {
         setItem('isShowDeleted', settings.isShowDeleted);
         setItem('color', settings.color);
         setItem('isReversed', settings.isReversed);
+        setItem('exportFormat', settings.exportFormat);
     }, [palette, settings]);
 
     useEffect(() => {
@@ -166,6 +168,7 @@ const Home = () => {
                                 isSelected={isSelected}
                                 isDisabled={!isSelected && isSelectionFull}
                                 username={saveData.username}
+                                exportFormat={settings.exportFormat}
                             />
                         );
                     })}

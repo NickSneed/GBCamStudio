@@ -7,7 +7,7 @@ const getFormattedUsername = (username) => {
     return '-' + username.toLowerCase().replace(/\s/g, '-');
 };
 
-export const usePhotoExporter = (saveCanvasRef, username, paletteId) => {
+export const usePhotoExporter = (saveCanvasRef, username, paletteId, format = 'png') => {
     const handleExport = useCallback(async () => {
         const canvas = saveCanvasRef.current;
         if (!canvas) {
@@ -15,13 +15,17 @@ export const usePhotoExporter = (saveCanvasRef, username, paletteId) => {
             return;
         }
 
-        const blob = await canvas.convertToBlob({ type: 'image/png' });
+        const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+        const extension = format === 'jpg' ? 'jpg' : 'png';
+        const blob = await canvas.convertToBlob({ type: mimeType });
         const link = document.createElement('a');
-        link.download = `gb-photo${getFormattedUsername(username)}-${paletteId}-${Date.now()}.png`;
+        link.download = `gb-photo${getFormattedUsername(
+            username
+        )}-${paletteId}-${Date.now()}.${extension}`;
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
-    }, [saveCanvasRef, username, paletteId]);
+    }, [saveCanvasRef, username, paletteId, format]);
 
     return { handleExport };
 };

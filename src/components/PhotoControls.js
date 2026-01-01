@@ -1,13 +1,20 @@
 import PropTypes from 'prop-types';
 
-const PhotoControls = ({ onExport, onSelect, isSelected, isDisabled, imageIndex }) => {
+const PhotoControls = ({
+    onExport,
+    onSelect,
+    isSelected,
+    isDisabled,
+    imageIndex,
+    format = 'png'
+}) => {
     return (
         <div>
             <button
                 className="button"
                 onClick={onExport}
             >
-                Export<span> as PNG</span>
+                Export<span> as {format.toUpperCase()}</span>
             </button>
             {onSelect ? (
                 <label className="pixel-checkbox">
@@ -29,14 +36,16 @@ PhotoControls.propTypes = {
     onSelect: PropTypes.func,
     isSelected: PropTypes.bool,
     isDisabled: PropTypes.bool,
-    imageIndex: PropTypes.number
+    imageIndex: PropTypes.number,
+    format: PropTypes.string
 };
 
 PhotoControls.defaultProps = {
     onSelect: null,
     isSelected: false,
     isDisabled: false,
-    imageIndex: -1
+    imageIndex: -1,
+    format: 'png'
 };
 
 export default PhotoControls;
