@@ -16,7 +16,8 @@ function Photo({
     isSelected,
     isDisabled,
     drawHandlers,
-    paletteOrder
+    paletteOrder,
+    username
 }) {
     const { displayCanvasRef, saveCanvasRef } = usePhotoRenderer(
         image,
@@ -25,7 +26,7 @@ function Photo({
         scaleFactor,
         paletteOrder
     );
-    const { handleExport } = usePhotoExporter(saveCanvasRef);
+    const { handleExport } = usePhotoExporter(saveCanvasRef, username, paletteId);
     const displayScale = scaleFactor;
     const imageBaseWidth = frame ? 160 : 128;
     const isWild = frame && frame.name.includes('wild');
@@ -109,7 +110,8 @@ Photo.propTypes = {
         onDrawEnd: PropTypes.func,
         onMouseLeave: PropTypes.func
     }),
-    paletteOrder: PropTypes.string
+    paletteOrder: PropTypes.string,
+    username: PropTypes.string
 };
 
 export default Photo;

@@ -1,6 +1,13 @@
 import { useCallback } from 'react';
 
-export const usePhotoExporter = (saveCanvasRef) => {
+const getFormattedUsername = (username) => {
+    if (!username) {
+        return '';
+    }
+    return '-' + username.toLowerCase().replace(/\s/g, '-');
+};
+
+export const usePhotoExporter = (saveCanvasRef, username, paletteId) => {
     const handleExport = useCallback(async () => {
         const canvas = saveCanvasRef.current;
         if (!canvas) {
@@ -10,11 +17,11 @@ export const usePhotoExporter = (saveCanvasRef) => {
 
         const blob = await canvas.convertToBlob({ type: 'image/png' });
         const link = document.createElement('a');
-        link.download = `gb-photo-${Date.now()}.png`;
+        link.download = `gb-photo${getFormattedUsername(username)}-${paletteId}-${Date.now()}.png`;
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
-    }, [saveCanvasRef]);
+    }, [saveCanvasRef, username, paletteId]);
 
     return { handleExport };
 };

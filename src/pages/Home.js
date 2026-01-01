@@ -165,6 +165,7 @@ const Home = () => {
                                 onSelect={handlePhotoSelect}
                                 isSelected={isSelected}
                                 isDisabled={!isSelected && isSelectionFull}
+                                username={saveData.username}
                             />
                         );
                     })}
