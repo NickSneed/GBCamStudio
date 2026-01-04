@@ -163,6 +163,8 @@ const Home = () => {
         return null;
     }).filter(Boolean);
 
+    allImages.sort((a, b) => a.photoIndex - b.photoIndex);
+
     const activeImages = allImages.filter((image) => !image.isDeleted);
     const deletedImages = allImages.filter((image) => image.isDeleted);
 
