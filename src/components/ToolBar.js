@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import PaletteSelector from '../components/PaletteSelector.js';
 import FileLoader from '../components/FileLoader.js';
-import { parseSave } from 'gbcam-js';
+import { parseSave } from 'tricklens-js';
 import * as styles from './ToolBar.module.css';
 
 const ToolBar = forwardRef(
@@ -70,7 +70,7 @@ const ToolBar = forwardRef(
                             &#9965;
                         </button>
                     </div>
-                    <span className={`${styles.logo} fontBold`}>GBCam Studio</span>
+                    <span className={`${styles.logo} fontBold`}>TrickLens Studio</span>
                 </div>
             </>
         );

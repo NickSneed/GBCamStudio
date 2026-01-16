@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { palettes, applyPalette } from 'gbcam-js';
+import { palettes, applyPalette } from 'tricklens-js';
 import { recolorFrame, composeImage } from '../utils/canvasUtils.js';
 import { getFrameOffsets } from '../utils/frameUtils.js';
 

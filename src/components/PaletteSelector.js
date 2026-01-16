@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { palettes } from 'gbcam-js';
+import { palettes } from 'tricklens-js';
 import * as styles from './PaletteSelector.module.css';
 import Modal from './Modal.js';
 

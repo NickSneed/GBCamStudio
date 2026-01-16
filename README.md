@@ -1,8 +1,8 @@
-# GBCamStudio
+# TrickLens Studio
 
 https://gbcs.nicksneed.com/
 
-GBCamStudio is a web-based utility that allows you to view, customize, and export your Game Boy Camera photos from a `.sav` file.
+TrickLens is a web-based utility that allows you to view, customize, and export your Game Boy Camera photos from a `.sav` file.
 
 ## Features
 
@@ -15,7 +15,7 @@ GBCamStudio is a web-based utility that allows you to view, customize, and expor
 
 ## How to Use
 
-1.  Open the GBCamStudio application in your web browser.
+1.  Open the TrickLens application in your web browser.
 2.  Use the "Load .sav" button to open your Game Boy Camera save file.
 3.  Your photos will be displayed in a grid.
 4.  Use the toolbar to change the palette, add a frame, or adjust other settings.

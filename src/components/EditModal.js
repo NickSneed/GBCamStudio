@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Photo from '../components/Photo.js';
 import * as styles from './EditModal.module.css';
-import { applyEffect, createMontage } from 'gbcam-js';
+import { applyEffect, createMontage } from 'tricklens-js';
 import { useCanvasDrawer } from '../hooks/useCanvasDrawer.js';
 
 const EditModal = ({

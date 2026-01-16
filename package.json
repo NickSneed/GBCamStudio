@@ -1,11 +1,11 @@
 {
-    "name": "gmcamstudio",
+    "name": "tricklens-studio",
     "version": "1.0.0",
     "type": "module",
     "description": "A studio app for Game Boy Camera photos",
     "main": "src/app.js",
     "bin": {
-        "gbcam-studio": "src/app.js"
+        "tricklens-studio": "src/app.js"
     },
     "scripts": {
         "test": "node build/clearConsole && eslint src",
@@ -37,9 +37,9 @@
         "webpack-dev-server": "^5.2.1"
     },
     "dependencies": {
-        "gbcam-js": "github:NickSneed/GBCamJS",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-router-dom": "^7.6.0"
+        "react-router-dom": "^7.6.0",
+        "tricklens-js": "github:NickSneed/TrickLensJS"
     }
 }
