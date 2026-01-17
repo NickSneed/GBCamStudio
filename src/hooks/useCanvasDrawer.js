@@ -52,7 +52,9 @@ export const useCanvasDrawer = (initialImage, frame, color, brushSize) => {
 
     const handleDrawStart = useCallback(
         (e) => {
-            e.preventDefault();
+            if (e.cancelable) {
+                e.preventDefault();
+            }
             setIsDrawing(true);
             drawOnCanvas(e);
         },
@@ -61,7 +63,9 @@ export const useCanvasDrawer = (initialImage, frame, color, brushSize) => {
 
     const handleDrawMove = useCallback(
         (e) => {
-            e.preventDefault();
+            if (e.cancelable) {
+                e.preventDefault();
+            }
             if (isDrawing) {
                 drawOnCanvas(e);
             }
@@ -70,7 +74,9 @@ export const useCanvasDrawer = (initialImage, frame, color, brushSize) => {
     );
 
     const handleDrawEnd = useCallback((e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+        }
         setIsDrawing(false);
     }, []);
 
